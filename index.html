@@ -3,83 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupuesto Participativo Medellín - ¿Cómo repartirías 195 mil millones?</title>
+    <title>¿195 mil millones en piscinas y a Medellín no le faltará nada más?</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .slider {
             -webkit-appearance: none;
             appearance: none;
-            height: 8px;
+            height: 10px;
             border-radius: 5px;
             background: #e5e7eb;
             outline: none;
+            transition: all 0.3s ease;
         }
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: #7010A6;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: #7010A6;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .slider:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
     <div id="root">
-        <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50 p-4">
-            <div class="max-w-6xl mx-auto">
+        <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
+            <div class="max-w-7xl mx-auto px-4 py-8">
                 <!-- Header -->
-                <header class="text-center mb-8 pt-8">
-                    <h1 class="text-4xl md:text-5xl font-bold text-purple-900 mb-4">
-                        ¿Cómo repartirías 195 mil millones de pesos?
+                <header class="text-center mb-10">
+                    <h1 class="text-3xl md:text-5xl font-bold text-purple-900 mb-6">
+                        ¿195 mil millones en piscinas y a Medellín no le faltará nada más?
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-700 mb-2">
-                        El Alcalde de Medellín destinó este presupuesto para piscinas.
-                    </p>
-                    <p class="text-lg md:text-xl text-gray-700 font-semibold">
-                        ¿Cuáles serían tus prioridades de inversión social?
-                    </p>
-                </header>
-
-                <!-- Contador de presupuesto -->
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-                    <div class="flex flex-col md:flex-row justify-between items-center mb-4">
-                        <div class="mb-4 md:mb-0">
-                            <h2 class="text-2xl font-bold text-purple-900">Distribuye el presupuesto</h2>
-                            <p class="text-gray-600">Mueve los sliders para asignar recursos</p>
+                    
+                    <!-- Contexto -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-8 max-w-4xl mx-auto">
+                        <div class="bg-purple-100 border-l-4 border-purple-600 p-4 mb-6">
+                            <p class="text-lg italic text-purple-900">
+                                Dijo el Alcalde: <strong>"Lo único que le faltaba a Medellín era mar y playa. Ahora no nos faltará nada"</strong> 
+                                para justificar la inversión de 195 mil millones de pesos en la adecuación de las piscinas del Juan Pablo II.
+                            </p>
                         </div>
-                        <div class="text-center">
-                            <div id="contador" class="text-3xl font-bold text-yellow-600">
-                                $195,000 millones
+                        
+                        <p class="text-lg text-gray-700 mb-6">
+                            El deporte es fundamental y creemos en él. <strong>¿Pero en serio con esa inversión a Medellín no le faltará nada?</strong>
+                        </p>
+                        
+                        <h3 class="text-2xl font-bold text-purple-900 mb-4">¿Qué puedes hacer con 195 mil millones de pesos?</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 text-left">
+                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                                <span class="text-2xl mb-2">🏠</span>
+                                <p class="text-sm">Con 195 mil millones podrías comprar <strong>650 casas</strong> de 300 millones cada una. 
+                                Eso significa darle casa propia a <strong>1 de cada 10 familias de Belén</strong> (la comuna más poblada con 222,266 habitantes)</p>
                             </div>
-                            <div class="text-sm text-gray-600">
-                                Por asignar
+                            
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                <span class="text-2xl mb-2">🛒</span>
+                                <p class="text-sm">Con 325,000 mercados de $600,000, podrías alimentar durante <strong>un mes completo a TODAS las familias 
+                                de Laureles-Estadio, La América y Guayabal juntas</strong> (254,521 habitantes)</p>
                             </div>
+                            
+                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <span class="text-2xl mb-2">💵</span>
+                                <p class="text-sm">150,000 salarios mínimos alcanzarían para pagarle un mes a <strong>TODOS los habitantes 
+                                de La Candelaria y Guayabal combinadas</strong> (144,764 personas)</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                                <span class="text-2xl mb-2">🎓</span>
+                                <p class="text-sm">32,500 semestres universitarios para becar la carrera completa a <strong>todos los jóvenes 
+                                de Popular y Santa Cruz</strong> (aprox. 5,400 jóvenes de 18-25 años)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-purple-900 text-white rounded-lg">
+                            <p class="text-lg font-semibold text-center">
+                                Porque sentimos que en Medellín faltan muchas cosas, si tú fueras la alcaldesa o el alcalde de esta ciudad 
+                                <span class="text-yellow-300">¿Cómo repartirías ese presupuesto?</span>
+                            </p>
                         </div>
                     </div>
+                </header>
 
-                    <!-- Sliders -->
-                    <div class="space-y-6" id="sliders-container">
-                        <!-- Se llenarán con JavaScript -->
+                <!-- Distribuidor de presupuesto -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-purple-900 mb-2">¡Tu opinión cuenta!</h2>
+                        <p class="text-gray-600">Mueve las barras para asignar los 195 mil millones en lo que consideras que realmente necesita Medellín</p>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <!-- Sliders (2 columnas en desktop) -->
+                        <div class="lg:col-span-2">
+                            <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
+                                <!-- Se llenarán con JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Contador lateral -->
+                        <div class="lg:col-span-1">
+                            <div class="sticky top-4 bg-gradient-to-br from-purple-100 to-yellow-100 rounded-lg p-6 text-center">
+                                <h3 class="text-lg font-bold text-purple-900 mb-4">Presupuesto por asignar</h3>
+                                <div id="contador" class="text-4xl font-bold text-yellow-600 mb-2">
+                                    $195,000
+                                </div>
+                                <div class="text-lg text-gray-700 mb-4">
+                                    millones de pesos
+                                </div>
+                                <div id="estado-texto" class="text-sm text-gray-600 mb-4">
+                                    Distribuye el presupuesto completo
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                    <div id="barra-progreso" class="bg-gradient-to-r from-purple-600 to-yellow-500 h-4 rounded-full transition-all duration-300" 
+                                         style="width: 0%"></div>
+                                </div>
+                                <div id="mensaje-completado" class="hidden">
+                                    <div class="text-green-600 font-bold text-lg mb-3">
+                                        ✓ ¡Presupuesto completo!
+                                    </div>
+                                    <button onclick="scrollToGrafico()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-lg">
+                                        Ver mi distribución ↓
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Gráfico (oculto inicialmente) -->
                 <div id="grafico-container" class="bg-white rounded-lg shadow-lg p-6 mb-8 hidden">
-                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Tu distribución presupuestal</h3>
-                    <div id="barras-container" class="space-y-3">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-2 text-center">Si yo fuera Alcalde invertiría 195 mil millones en:</h3>
+                    <p class="text-gray-600 text-center mb-6">Esta es tu propuesta de distribución presupuestal</p>
+                    <div id="barras-container" class="space-y-3 max-w-4xl mx-auto">
                         <!-- Se llenarán con JavaScript -->
                     </div>
                     
-                    <div class="mt-6 flex justify-center">
+                    <div class="mt-8 flex justify-center">
                         <button onclick="generarImagen()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">
                             📸 Generar imagen para compartir
                         </button>
@@ -91,7 +163,7 @@
 
                 <!-- Preview y compartir (oculto inicialmente) -->
                 <div id="compartir-container" class="bg-white rounded-lg shadow-lg p-6 mb-8 hidden">
-                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Comparte tu propuesta</h3>
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4 text-center">Comparte tu propuesta</h3>
                     <div class="mb-6">
                         <img id="imagen-preview" alt="Mi propuesta" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg" />
                     </div>
@@ -147,27 +219,44 @@
             return new Intl.NumberFormat('es-CO').format(valor);
         }
 
+        // Scroll suave al gráfico
+        function scrollToGrafico() {
+            document.getElementById('grafico-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
         // Actualizar contador
         function actualizarContador() {
             const totalAsignado = Object.values(distribucion).reduce((sum, val) => sum + val, 0);
             const restante = PRESUPUESTO_TOTAL - totalAsignado;
+            const porcentajeAsignado = (totalAsignado / PRESUPUESTO_TOTAL) * 100;
+            
             const contador = document.getElementById('contador');
+            const estadoTexto = document.getElementById('estado-texto');
+            const barraProgreso = document.getElementById('barra-progreso');
+            const mensajeCompletado = document.getElementById('mensaje-completado');
             const graficoContainer = document.getElementById('grafico-container');
             
-            contador.textContent = `$${formatearMiles(Math.abs(restante))} millones`;
+            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
+            barraProgreso.style.width = `${porcentajeAsignado}%`;
             
             if (restante === 0) {
-                contador.className = 'text-3xl font-bold text-green-600';
-                contador.nextElementSibling.textContent = '✓ Presupuesto completo';
+                contador.className = 'text-4xl font-bold text-green-600 mb-2';
+                estadoTexto.textContent = '¡Distribución completa!';
+                estadoTexto.className = 'text-sm text-green-600 mb-4 font-bold';
+                mensajeCompletado.classList.remove('hidden');
                 graficoContainer.classList.remove('hidden');
                 actualizarGrafico();
             } else if (restante > 0) {
-                contador.className = 'text-3xl font-bold text-yellow-600';
-                contador.nextElementSibling.textContent = 'Por asignar';
+                contador.className = 'text-4xl font-bold text-yellow-600 mb-2';
+                estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
+                estadoTexto.className = 'text-sm text-gray-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
                 graficoContainer.classList.add('hidden');
             } else {
-                contador.className = 'text-3xl font-bold text-red-600';
-                contador.nextElementSibling.textContent = 'Excedido';
+                contador.className = 'text-4xl font-bold text-red-600 mb-2';
+                estadoTexto.textContent = `Te excediste por ${formatearMiles(Math.abs(restante))} millones`;
+                estadoTexto.className = 'text-sm text-red-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
                 graficoContainer.classList.add('hidden');
             }
         }
@@ -205,26 +294,31 @@
             const container = document.getElementById('barras-container');
             container.innerHTML = '';
             
-            categorias.forEach(cat => {
+            // Ordenar categorías por valor de mayor a menor
+            const categoriasOrdenadas = [...categorias].sort((a, b) => 
+                distribucion[b.id] - distribucion[a.id]
+            ).filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach(cat => {
                 const valor = distribucion[cat.id];
                 const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
                 
                 const barra = document.createElement('div');
                 barra.className = 'flex items-center gap-3';
                 barra.innerHTML = `
-                    <div class="w-32 text-right">
-                        <span class="text-xl">${cat.emoji}</span>
+                    <div class="w-36 text-right flex items-center justify-end gap-2">
+                        <span class="text-2xl">${cat.emoji}</span>
                         <span class="text-sm font-semibold">${cat.nombre}</span>
                     </div>
                     <div class="flex-1">
-                        <div class="bg-gray-200 rounded-full h-8 relative">
-                            <div class="h-8 rounded-full flex items-center justify-end pr-2" 
+                        <div class="bg-gray-200 rounded-full h-10 relative overflow-hidden">
+                            <div class="h-10 rounded-full flex items-center justify-end pr-3 transition-all duration-500" 
                                  style="width: ${porcentaje}%; background-color: ${cat.color}">
-                                <span class="text-xs font-bold text-white">${porcentaje.toFixed(1)}%</span>
+                                <span class="text-sm font-bold text-white">${porcentaje.toFixed(1)}%</span>
                             </div>
                         </div>
                     </div>
-                    <div class="w-24 text-right font-bold">
+                    <div class="w-28 text-right font-bold text-purple-900">
                         $${formatearMiles(valor)}M
                     </div>
                 `;
@@ -249,22 +343,23 @@
             
             // Título
             ctx.fillStyle = '#FCD700';
-            ctx.font = 'bold 48px Arial';
+            ctx.font = 'bold 42px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('¿Cómo repartirías 195 mil millones?', 600, 80);
-            
-            // Subtítulo
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = '24px Arial';
-            ctx.fillText('Mi propuesta de presupuesto para Medellín', 600, 120);
+            ctx.fillText('Si yo fuera Alcalde invertiría', 600, 70);
+            ctx.fillText('195 mil millones en:', 600, 115);
             
             // Dibujar barras
-            const startY = 180;
+            const startY = 160;
             const barHeight = 35;
             const maxBarWidth = 700;
             const startX = 250;
             
-            categorias.forEach((cat, index) => {
+            // Ordenar y filtrar categorías
+            const categoriasOrdenadas = [...categorias]
+                .sort((a, b) => distribucion[b.id] - distribucion[a.id])
+                .filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach((cat, index) => {
                 const y = startY + (index * (barHeight + 10));
                 const valor = distribucion[cat.id];
                 const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
@@ -286,13 +381,16 @@
             
             // Footer
             ctx.fillStyle = '#FCD700';
-            ctx.font = 'bold 28px Arial';
+            ctx.font = 'bold 24px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 580);
+            ctx.fillText('¿Y a Medellín no le faltará nada más?', 600, 560);
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 590);
             
             imageUrl = canvas.toDataURL('image/png');
             document.getElementById('imagen-preview').src = imageUrl;
             document.getElementById('compartir-container').classList.remove('hidden');
+            document.getElementById('compartir-container').scrollIntoView({ behavior: 'smooth' });
         }
 
         // Descargar imagen
@@ -305,7 +403,7 @@
 
         // Compartir en redes
         function compartirEnRedes(red) {
-            const mensaje = encodeURIComponent('¿Cómo repartirías 195 mil millones de pesos? Yo ya hice mi propuesta de presupuesto participativo para Medellín. #MedellínDecide');
+            const mensaje = encodeURIComponent('Si yo fuera Alcalde de Medellín, invertiría los 195 mil millones de manera diferente. ¿Y tú cómo los repartirías? #MedellínDecide');
             const url = encodeURIComponent(window.location.href);
             
             const urls = {
@@ -323,30 +421,32 @@
             
             categorias.forEach(cat => {
                 const sliderDiv = document.createElement('div');
-                sliderDiv.className = 'space-y-2';
+                sliderDiv.className = 'bg-gray-50 p-4 rounded-lg';
                 sliderDiv.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <label class="flex items-center gap-2 font-semibold text-gray-700">
-                            <span class="text-2xl">${cat.emoji}</span>
-                            <span>${cat.nombre}</span>
-                        </label>
-                        <div class="flex items-center gap-2">
-                            <span id="porcentaje-${cat.id}" class="text-sm text-gray-600">0.0%</span>
-                            <span id="valor-${cat.id}" class="font-bold text-purple-900 min-w-[120px] text-right">$0M</span>
+                    <div class="mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="flex items-center gap-2 font-semibold text-gray-700">
+                                <span class="text-2xl">${cat.emoji}</span>
+                                <span class="text-sm">${cat.nombre}</span>
+                            </label>
                         </div>
+                        <div class="flex items-center justify-between text-sm mb-2">
+                            <span id="porcentaje-${cat.id}" class="text-gray-600">0%</span>
+                            <span id="valor-${cat.id}" class="font-bold text-purple-900">$0M</span>
+                        </div>
+                        <input
+                            type="range"
+                            id="slider-${cat.id}"
+                            min="0"
+                            max="${PRESUPUESTO_TOTAL}"
+                            step="100"
+                            value="0"
+                            onchange="handleSliderChange('${cat.id}', this.value)"
+                            oninput="handleSliderChange('${cat.id}', this.value)"
+                            class="slider w-full"
+                            style="background: linear-gradient(to right, ${cat.color} 0%, ${cat.color} 0%, #e5e7eb 0%, #e5e7eb 100%)"
+                        />
                     </div>
-                    <input
-                        type="range"
-                        id="slider-${cat.id}"
-                        min="0"
-                        max="${PRESUPUESTO_TOTAL}"
-                        step="100"
-                        value="0"
-                        onchange="handleSliderChange('${cat.id}', this.value)"
-                        oninput="handleSliderChange('${cat.id}', this.value)"
-                        class="slider w-full"
-                        style="background: linear-gradient(to right, ${cat.color} 0%, ${cat.color} 0%, #e5e7eb 0%, #e5e7eb 100%)"
-                    />
                 `;
                 container.appendChild(sliderDiv);
             });
