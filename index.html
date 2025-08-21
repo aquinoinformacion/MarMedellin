@@ -63,29 +63,33 @@
                         
                         <h3 class="text-2xl font-bold text-purple-900 mb-4">¿Qué puedes hacer con 195 mil millones de pesos?</h3>
                         
-                        <div class="grid md:grid-cols-2 gap-4 text-left">
-                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                                <span class="text-2xl mb-2">🏠</span>
-                                <p class="text-sm">Con 195 mil millones podrías comprar <strong>650 casas</strong> de 300 millones cada una. 
-                                Eso significa darle casa propia a <strong>1 de cada 10 familias de Belén</strong> (la comuna más poblada con 222,266 habitantes)</p>
+                        <div class="grid md:grid-cols-2 gap-4 text-center">
+                            <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+                                <div class="text-5xl mb-2">🏠</div>
+                                <div class="text-3xl font-bold text-gray-800 mb-1">650 casas</div>
+                                <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
+                                <div class="text-lg font-semibold text-yellow-700">1 de cada 10 familias de Belén</div>
                             </div>
                             
-                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                                <span class="text-2xl mb-2">🛒</span>
-                                <p class="text-sm">Con 325,000 mercados de $600,000, podrías alimentar durante <strong>un mes completo a TODAS las familias 
-                                de Laureles-Estadio, La América y Guayabal juntas</strong> (254,521 habitantes)</p>
+                            <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                                <div class="text-5xl mb-2">🛒</div>
+                                <div class="text-3xl font-bold text-gray-800 mb-1">325,000 mercados</div>
+                                <div class="text-sm text-gray-600 mb-2">de $600,000</div>
+                                <div class="text-lg font-semibold text-green-700">un mes completo a TODAS las familias de Laureles-Estadio, La América y Guayabal juntas</div>
                             </div>
                             
-                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                                <span class="text-2xl mb-2">💵</span>
-                                <p class="text-sm">150,000 salarios mínimos alcanzarían para pagarle un mes a <strong>TODOS los habitantes 
-                                de La Candelaria y Guayabal combinadas</strong> (144,764 personas)</p>
+                            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                                <div class="text-5xl mb-2">💵</div>
+                                <div class="text-3xl font-bold text-gray-800 mb-1">150,000 salarios</div>
+                                <div class="text-sm text-gray-600 mb-2">mínimos mensuales</div>
+                                <div class="text-lg font-semibold text-blue-700">TODOS los habitantes de La Candelaria y Guayabal combinadas</div>
                             </div>
                             
-                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
-                                <span class="text-2xl mb-2">🎓</span>
-                                <p class="text-sm">32,500 semestres universitarios para becar la carrera completa a <strong>todos los jóvenes 
-                                de Popular y Santa Cruz</strong> (aprox. 5,400 jóvenes de 18-25 años)</p>
+                            <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                                <div class="text-5xl mb-2">🎓</div>
+                                <div class="text-3xl font-bold text-gray-800 mb-1">32,500 semestres</div>
+                                <div class="text-sm text-gray-600 mb-2">universitarios</div>
+                                <div class="text-lg font-semibold text-purple-700">todos los jóvenes de Popular y Santa Cruz</div>
                             </div>
                         </div>
                         
@@ -334,25 +338,30 @@
             canvas.width = 1200;
             canvas.height = 630;
             
-            // Fondo con gradiente
-            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
-            gradient.addColorStop(0, '#7010A6');
-            gradient.addColorStop(1, '#4A0E6B');
-            ctx.fillStyle = gradient;
+            // Fondo blanco
+            ctx.fillStyle = '#FFFFFF';
             ctx.fillRect(0, 0, 1200, 630);
             
+            // Header morado
+            ctx.fillStyle = '#7010A6';
+            ctx.fillRect(0, 0, 1200, 120);
+            
             // Título
-            ctx.fillStyle = '#FCD700';
-            ctx.font = 'bold 42px Arial';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 36px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('Si yo fuera Alcalde invertiría', 600, 70);
-            ctx.fillText('195 mil millones en:', 600, 115);
+            ctx.fillText('Si yo fuera Alcalde invertiría 195 mil millones en:', 600, 70);
+            
+            // Subtítulo
+            ctx.fillStyle = '#FCD700';
+            ctx.font = '20px Arial';
+            ctx.fillText('Esta es mi propuesta de distribución presupuestal', 600, 100);
             
             // Dibujar barras
-            const startY = 160;
-            const barHeight = 35;
-            const maxBarWidth = 700;
-            const startX = 250;
+            const startY = 150;
+            const barHeight = 45;
+            const maxBarWidth = 650;
+            const startX = 280;
             
             // Ordenar y filtrar categorías
             const categoriasOrdenadas = [...categorias]
@@ -360,32 +369,50 @@
                 .filter(cat => distribucion[cat.id] > 0);
             
             categoriasOrdenadas.forEach((cat, index) => {
-                const y = startY + (index * (barHeight + 10));
+                const y = startY + (index * (barHeight + 8));
                 const valor = distribucion[cat.id];
                 const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
                 const barWidth = (porcentaje / 100) * maxBarWidth;
                 
-                ctx.font = '24px Arial';
-                ctx.fillStyle = '#FFFFFF';
+                // Emoji y nombre
+                ctx.font = '20px Arial';
+                ctx.fillStyle = '#333333';
                 ctx.textAlign = 'right';
-                ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 10, y + 25);
+                ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 15, y + 28);
                 
+                // Fondo de la barra
+                ctx.fillStyle = '#E5E7EB';
+                ctx.fillRect(startX, y, maxBarWidth, barHeight);
+                
+                // Barra de progreso
                 ctx.fillStyle = cat.color;
                 ctx.fillRect(startX, y, barWidth, barHeight);
                 
-                ctx.fillStyle = '#FFFFFF';
-                ctx.font = 'bold 20px Arial';
+                // Porcentaje dentro de la barra
+                if (porcentaje > 5) {
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`${porcentaje.toFixed(1)}%`, startX + barWidth/2, y + 28);
+                }
+                
+                // Valor
+                ctx.fillStyle = '#333333';
+                ctx.font = 'bold 18px Arial';
                 ctx.textAlign = 'left';
-                ctx.fillText(`${porcentaje.toFixed(1)}% - $${formatearMiles(valor)}M`, startX + barWidth + 10, y + 25);
+                ctx.fillText(`${formatearMiles(valor)}M`, startX + maxBarWidth + 15, y + 28);
             });
             
-            // Footer
-            ctx.fillStyle = '#FCD700';
-            ctx.font = 'bold 24px Arial';
+            // Footer con nuevo texto
+            ctx.fillStyle = '#7010A6';
+            ctx.font = 'bold 22px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('¿Y a Medellín no le faltará nada más?', 600, 560);
-            ctx.font = 'bold 20px Arial';
-            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 590);
+            ctx.fillText('Para mí, mientras hayan 313.257 personas en pobreza,', 600, 540);
+            ctx.fillText('las piscinas NO son una prioridad ni hacen que a Medellín no le falte nada', 600, 570);
+            
+            ctx.fillStyle = '#FCD700';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 600);
             
             imageUrl = canvas.toDataURL('image/png');
             document.getElementById('imagen-preview').src = imageUrl;
