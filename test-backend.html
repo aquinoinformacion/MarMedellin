@@ -10,21 +10,31 @@
     <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold mb-8 text-purple-900">Test de Backend - Presupuesto Participativo</h1>
         
+        <!-- Test 0: Verificar que Netlify Functions funciona -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4 text-green-700">Test 0: Verificar Netlify Functions</h2>
+            <p class="text-gray-600 mb-4">Verifica que las funciones de Netlify están activas con un simple GET</p>
+            <button onclick="testNetlifyFunctions()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Verificar Functions
+            </button>
+            <div id="result-functions" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
+        </div>
+        
         <!-- Test 1: Conexión directa a Google Apps Script -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 1: Conexión Directa a Google Apps Script</h2>
-            <p class="text-gray-600 mb-4">Intenta enviar datos directamente al endpoint de Google (probablemente fallará con 401)</p>
-            <button onclick="testDirectGoogle()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-                Probar Conexión Directa
+            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 1: Verificar Google Apps Script</h2>
+            <p class="text-gray-600 mb-4">Verifica que el Google Apps Script está activo (abre en nueva pestaña)</p>
+            <button onclick="testGoogleDirect()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                Verificar Google Apps Script
             </button>
             <div id="result-direct" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
         </div>
 
         <!-- Test 2: Conexión a través de Netlify Proxy -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 2: Conexión via Netlify Proxy</h2>
-            <p class="text-gray-600 mb-4">Envía datos a través de la función proxy de Netlify (debería funcionar)</p>
-            <button onclick="testNetlifyProxy()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            <h2 class="text-xl font-bold mb-4 text-blue-700">Test 2: Conexión via Netlify Proxy</h2>
+            <p class="text-gray-600 mb-4">Envía datos a través de la función proxy de Netlify</p>
+            <button onclick="testNetlifyProxy()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                 Probar via Proxy
             </button>
             <div id="result-proxy" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
@@ -32,9 +42,9 @@
 
         <!-- Test 3: Enviar datos de prueba completos -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 3: Enviar Datos de Prueba Completos</h2>
+            <h2 class="text-xl font-bold mb-4 text-indigo-700">Test 3: Enviar Datos Completos</h2>
             <p class="text-gray-600 mb-4">Simula el envío de una distribución presupuestaria completa</p>
-            <button onclick="testEnvioCompleto()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <button onclick="testEnvioCompleto()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
                 Enviar Distribución de Prueba
             </button>
             <div id="result-completo" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
@@ -42,12 +52,20 @@
 
         <!-- Test 4: Obtener estadísticas -->
         <div class="bg-white rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 4: Obtener Estadísticas</h2>
+            <h2 class="text-xl font-bold mb-4 text-yellow-700">Test 4: Obtener Estadísticas</h2>
             <p class="text-gray-600 mb-4">Intenta obtener las estadísticas actuales del sistema</p>
             <button onclick="testObtenerEstadisticas()" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">
                 Obtener Estadísticas
             </button>
             <div id="result-stats" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
+        </div>
+        
+        <!-- Información de debug -->
+        <div class="bg-gray-200 rounded-lg p-4 mt-8">
+            <h3 class="font-bold mb-2">Información de Debug:</h3>
+            <p class="text-sm">URL actual: <code id="current-url"></code></p>
+            <p class="text-sm">Función proxy esperada en: <code>/.netlify/functions/googleProxy</code></p>
+            <p class="text-sm">Google Apps Script URL: <code>https://script.google.com/macros/s/AKfycbxGGJhHOxQjjSug5mLu1Pkr7dNHsoKRrjfCGIo8gpgqRRvrW7wzbZaDeupKij9MEUPh/exec</code></p>
         </div>
     </div>
 
@@ -55,8 +73,9 @@
         // URLs de los endpoints
         const GOOGLE_DIRECT_URL = 'https://script.google.com/macros/s/AKfycbxGGJhHOxQjjSug5mLu1Pkr7dNHsoKRrjfCGIo8gpgqRRvrW7wzbZaDeupKij9MEUPh/exec';
         const NETLIFY_PROXY_URL = '/.netlify/functions/googleProxy';
-        // Alternativa usando la redirección del netlify.toml
-        const API_URL = '/api/googleProxy';
+
+        // Mostrar URL actual
+        document.getElementById('current-url').textContent = window.location.origin;
 
         // Función helper para mostrar resultados
         function showResult(elementId, success, data) {
@@ -78,59 +97,61 @@
             }
         }
 
-        // Test 1: Conexión directa
-        async function testDirectGoogle() {
-            console.log('Probando conexión directa a Google Apps Script...');
+        // Test 0: Verificar Netlify Functions
+        async function testNetlifyFunctions() {
+            console.log('Verificando Netlify Functions...');
             
-            const testData = {
-                action: 'guardar_respuesta',
-                timestamp: new Date().toISOString(),
-                session_id: 'test_' + Date.now(),
-                distribucion: {
-                    salud: 50000,
-                    educacion: 45000,
-                    seguridad: 30000,
-                    vivienda: 40000,
-                    movilidad: 30000,
-                    servicios: 0,
-                    deporte: 0,
-                    cultura: 0
-                },
-                imagen_generada: 'NO',
-                imagen_compartida: 'NO',
-                red_compartida: '',
-                formulario_completado: 'NO',
-                nombre: 'Test Directo',
-                email: '',
-                whatsapp: '',
-                autorizo_contacto: 'NO',
-                ideas: '',
-                dispositivo: 'Test',
-                navegador: 'Test',
-                tiempo_sesion_segundos: 0
-            };
-
             try {
-                const response = await fetch(GOOGLE_DIRECT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Esto evita el error CORS pero no podemos leer la respuesta
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(testData)
+                // Intentar un simple GET a la función
+                const response = await fetch(NETLIFY_PROXY_URL, {
+                    method: 'GET'
                 });
-
-                // Con no-cors no podemos leer la respuesta
-                showResult('result-direct', false, {
-                    message: 'Petición enviada pero no se puede leer la respuesta debido a CORS',
-                    nota: 'Esto es normal. Por eso necesitamos el proxy.'
-                });
+                
+                if (response.status === 404) {
+                    showResult('result-functions', false, {
+                        error: 'Función no encontrada (404)',
+                        mensaje: 'La función googleProxy no está desplegada en Netlify',
+                        solucion: 'Verifica que el archivo esté en netlify/functions/googleProxy.js'
+                    });
+                } else if (response.status === 401) {
+                    showResult('result-functions', false, {
+                        error: 'No autorizado (401)',
+                        mensaje: 'La función existe pero hay un problema de autenticación',
+                        solucion: 'Revisa los logs de Netlify Functions'
+                    });
+                } else if (response.ok) {
+                    const data = await response.text();
+                    showResult('result-functions', true, {
+                        status: response.status,
+                        mensaje: 'Función activa',
+                        respuesta: data
+                    });
+                } else {
+                    showResult('result-functions', false, {
+                        status: response.status,
+                        statusText: response.statusText
+                    });
+                }
             } catch (error) {
-                showResult('result-direct', false, {
+                showResult('result-functions', false, {
                     error: error.message,
-                    tipo: 'Error de red o CORS'
+                    tipo: 'Error de red'
                 });
             }
+        }
+
+        // Test 1: Google Apps Script directo
+        function testGoogleDirect() {
+            console.log('Abriendo Google Apps Script en nueva pestaña...');
+            
+            // Abrir en nueva pestaña
+            window.open(GOOGLE_DIRECT_URL, '_blank');
+            
+            showResult('result-direct', true, {
+                mensaje: 'Se abrió una nueva pestaña',
+                esperado: 'Deberías ver un JSON con success: true y el mensaje de API activa',
+                nota: 'Si ves el JSON, el Google Apps Script está funcionando correctamente'
+            });
         }
 
         // Test 2: Via Netlify Proxy
@@ -138,34 +159,13 @@
             console.log('Probando conexión via Netlify Proxy...');
             
             const testData = {
-                action: 'guardar_respuesta',
+                action: 'test',
                 timestamp: new Date().toISOString(),
-                session_id: 'test_proxy_' + Date.now(),
-                distribucion: {
-                    salud: 50000,
-                    educacion: 45000,
-                    seguridad: 30000,
-                    vivienda: 40000,
-                    movilidad: 30000,
-                    servicios: 0,
-                    deporte: 0,
-                    cultura: 0
-                },
-                imagen_generada: 'NO',
-                imagen_compartida: 'NO',
-                red_compartida: '',
-                formulario_completado: 'NO',
-                nombre: 'Test Proxy',
-                email: '',
-                whatsapp: '',
-                autorizo_contacto: 'NO',
-                ideas: '',
-                dispositivo: 'Test',
-                navegador: 'Test',
-                tiempo_sesion_segundos: 0
+                mensaje: 'Test desde proxy'
             };
 
             try {
+                console.log('Enviando:', testData);
                 const response = await fetch(NETLIFY_PROXY_URL, {
                     method: 'POST',
                     headers: {
@@ -174,12 +174,30 @@
                     body: JSON.stringify(testData)
                 });
 
-                const data = await response.json();
-                showResult('result-proxy', response.ok, data);
+                console.log('Response status:', response.status);
+                
+                if (response.status === 404) {
+                    showResult('result-proxy', false, {
+                        error: 'Función no encontrada',
+                        solucion: 'La función proxy no está desplegada'
+                    });
+                } else {
+                    const data = await response.text();
+                    try {
+                        const jsonData = JSON.parse(data);
+                        showResult('result-proxy', response.ok, jsonData);
+                    } catch (e) {
+                        showResult('result-proxy', false, {
+                            status: response.status,
+                            respuesta: data,
+                            error: 'Respuesta no es JSON válido'
+                        });
+                    }
+                }
             } catch (error) {
                 showResult('result-proxy', false, {
                     error: error.message,
-                    nota: 'Asegúrate de que la función de Netlify esté desplegada'
+                    nota: 'Error de red o la función no está disponible'
                 });
             }
         }
@@ -206,11 +224,11 @@
                 imagen_compartida: 'SI',
                 red_compartida: 'whatsapp',
                 formulario_completado: 'SI',
-                nombre: 'Juan Pérez',
+                nombre: 'Juan Pérez Test',
                 email: 'juan@test.com',
                 whatsapp: '3001234567',
                 autorizo_contacto: 'SI',
-                ideas: 'Creo que deberíamos invertir más en educación y salud, son las bases para el desarrollo.',
+                ideas: 'Creo que deberíamos invertir más en educación y salud.',
                 dispositivo: 'Desktop',
                 navegador: 'Chrome',
                 tiempo_sesion_segundos: 180
@@ -225,8 +243,19 @@
                     body: JSON.stringify(testData)
                 });
 
-                const data = await response.json();
-                showResult('result-completo', response.ok, data);
+                const data = await response.text();
+                try {
+                    const jsonData = JSON.parse(data);
+                    showResult('result-completo', response.ok, jsonData);
+                    if (jsonData.success) {
+                        alert('¡Datos guardados! Revisa tu Google Sheet');
+                    }
+                } catch (e) {
+                    showResult('result-completo', false, {
+                        status: response.status,
+                        respuesta: data
+                    });
+                }
             } catch (error) {
                 showResult('result-completo', false, {
                     error: error.message
@@ -251,8 +280,16 @@
                     body: JSON.stringify(requestData)
                 });
 
-                const data = await response.json();
-                showResult('result-stats', response.ok, data);
+                const data = await response.text();
+                try {
+                    const jsonData = JSON.parse(data);
+                    showResult('result-stats', response.ok, jsonData);
+                } catch (e) {
+                    showResult('result-stats', false, {
+                        status: response.status,
+                        respuesta: data
+                    });
+                }
             } catch (error) {
                 showResult('result-stats', false, {
                     error: error.message
@@ -260,10 +297,11 @@
             }
         }
 
-        // Log para debugging
-        console.log('Página de prueba cargada. URLs configuradas:');
-        console.log('- Google Direct:', GOOGLE_DIRECT_URL);
-        console.log('- Netlify Proxy:', NETLIFY_PROXY_URL);
+        // Log inicial
+        console.log('Página de prueba cargada');
+        console.log('URL base:', window.location.origin);
+        console.log('Proxy URL:', NETLIFY_PROXY_URL);
+        console.log('Google URL:', GOOGLE_DIRECT_URL);
     </script>
 </body>
 </html>
