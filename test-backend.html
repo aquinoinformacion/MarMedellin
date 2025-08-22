@@ -3,149 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Directo API Google Apps Script</title>
+    <title>Test Backend - Presupuesto Participativo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-8">
-    <div class="max-w-2xl mx-auto">
-        <h1 class="text-2xl font-bold mb-6">Test Directo de Google Apps Script</h1>
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-purple-900">Test de Backend - Presupuesto Participativo</h1>
         
-        <div class="bg-white rounded-lg shadow p-6 mb-4">
-            <label class="block mb-2 font-semibold">URL del Google Apps Script:</label>
-            <input type="text" id="scriptUrl" 
-                   class="w-full p-2 border rounded mb-4"
-                   placeholder="https://script.google.com/macros/s/XXX/exec"
-                   value="">
-            <p class="text-sm text-gray-600 mb-4">
-                Pega aquí la URL que obtuviste al desplegar el Google Apps Script
-            </p>
+        <!-- Test 1: Conexión directa a Google Apps Script -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 1: Conexión Directa a Google Apps Script</h2>
+            <p class="text-gray-600 mb-4">Intenta enviar datos directamente al endpoint de Google (probablemente fallará con 401)</p>
+            <button onclick="testDirectGoogle()" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                Probar Conexión Directa
+            </button>
+            <div id="result-direct" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
         </div>
 
-        <div class="grid gap-4">
-            <!-- Test GET -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-lg font-bold mb-4">1. Test GET (verificar que está activo)</h2>
-                <button onclick="testGet()" 
-                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    Probar GET
-                </button>
-                <div id="result-get" class="mt-4"></div>
-            </div>
+        <!-- Test 2: Conexión a través de Netlify Proxy -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 2: Conexión via Netlify Proxy</h2>
+            <p class="text-gray-600 mb-4">Envía datos a través de la función proxy de Netlify (debería funcionar)</p>
+            <button onclick="testNetlifyProxy()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Probar via Proxy
+            </button>
+            <div id="result-proxy" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
+        </div>
 
-            <!-- Test POST Simple -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-lg font-bold mb-4">2. Test POST Simple</h2>
-                <button onclick="testPostSimple()" 
-                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                    Probar POST Simple
-                </button>
-                <div id="result-post-simple" class="mt-4"></div>
-            </div>
+        <!-- Test 3: Enviar datos de prueba completos -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 3: Enviar Datos de Prueba Completos</h2>
+            <p class="text-gray-600 mb-4">Simula el envío de una distribución presupuestaria completa</p>
+            <button onclick="testEnvioCompleto()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Enviar Distribución de Prueba
+            </button>
+            <div id="result-completo" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
+        </div>
 
-            <!-- Test POST Completo -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h2 class="text-lg font-bold mb-4">3. Test POST con Datos Completos</h2>
-                <button onclick="testPostCompleto()" 
-                        class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-                    Probar POST Completo
-                </button>
-                <div id="result-post-completo" class="mt-4"></div>
-            </div>
+        <!-- Test 4: Obtener estadísticas -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-4 text-purple-700">Test 4: Obtener Estadísticas</h2>
+            <p class="text-gray-600 mb-4">Intenta obtener las estadísticas actuales del sistema</p>
+            <button onclick="testObtenerEstadisticas()" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">
+                Obtener Estadísticas
+            </button>
+            <div id="result-stats" class="mt-4 p-4 bg-gray-50 rounded hidden"></div>
         </div>
     </div>
 
     <script>
+        // URLs de los endpoints
+        const GOOGLE_DIRECT_URL = 'https://script.google.com/macros/s/AKfycbxGGJhHOxQjjSug5mLu1Pkr7dNHsoKRrjfCGIo8gpgqRRvrW7wzbZaDeupKij9MEUPh/exec';
+        const NETLIFY_PROXY_URL = '/.netlify/functions/googleProxy';
+        // Alternativa usando la redirección del netlify.toml
+        const API_URL = '/api/googleProxy';
+
         // Función helper para mostrar resultados
-        function showResult(elementId, data, isError = false) {
+        function showResult(elementId, success, data) {
             const element = document.getElementById(elementId);
-            const bgColor = isError ? 'bg-red-50 border-red-300' : 'bg-green-50 border-green-300';
-            element.className = `mt-4 p-4 ${bgColor} border rounded`;
-            element.innerHTML = `<pre class="text-sm overflow-auto">${JSON.stringify(data, null, 2)}</pre>`;
-        }
-
-        // Test GET
-        async function testGet() {
-            const url = document.getElementById('scriptUrl').value;
-            if (!url) {
-                alert('Por favor ingresa la URL del Google Apps Script');
-                return;
-            }
-
-            try {
-                console.log('Probando GET a:', url);
-                const response = await fetch(url);
-                const data = await response.text();
-                
-                try {
-                    const jsonData = JSON.parse(data);
-                    showResult('result-get', jsonData, !response.ok);
-                } catch (e) {
-                    showResult('result-get', {
-                        status: response.status,
-                        response: data.substring(0, 500)
-                    }, true);
-                }
-            } catch (error) {
-                showResult('result-get', {
-                    error: error.message
-                }, true);
+            element.classList.remove('hidden');
+            
+            if (success) {
+                element.className = 'mt-4 p-4 bg-green-50 border border-green-300 rounded';
+                element.innerHTML = `
+                    <strong class="text-green-700">✓ Éxito!</strong>
+                    <pre class="mt-2 text-sm overflow-auto">${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } else {
+                element.className = 'mt-4 p-4 bg-red-50 border border-red-300 rounded';
+                element.innerHTML = `
+                    <strong class="text-red-700">✗ Error:</strong>
+                    <pre class="mt-2 text-sm overflow-auto">${JSON.stringify(data, null, 2)}</pre>
+                `;
             }
         }
 
-        // Test POST Simple
-        async function testPostSimple() {
-            const url = document.getElementById('scriptUrl').value;
-            if (!url) {
-                alert('Por favor ingresa la URL del Google Apps Script');
-                return;
-            }
-
+        // Test 1: Conexión directa
+        async function testDirectGoogle() {
+            console.log('Probando conexión directa a Google Apps Script...');
+            
             const testData = {
-                action: 'test',
-                message: 'Prueba simple',
-                timestamp: new Date().toISOString()
+                action: 'guardar_respuesta',
+                timestamp: new Date().toISOString(),
+                session_id: 'test_' + Date.now(),
+                distribucion: {
+                    salud: 50000,
+                    educacion: 45000,
+                    seguridad: 30000,
+                    vivienda: 40000,
+                    movilidad: 30000,
+                    servicios: 0,
+                    deporte: 0,
+                    cultura: 0
+                },
+                imagen_generada: 'NO',
+                imagen_compartida: 'NO',
+                red_compartida: '',
+                formulario_completado: 'NO',
+                nombre: 'Test Directo',
+                email: '',
+                whatsapp: '',
+                autorizo_contacto: 'NO',
+                ideas: '',
+                dispositivo: 'Test',
+                navegador: 'Test',
+                tiempo_sesion_segundos: 0
             };
 
             try {
-                console.log('Enviando POST simple:', testData);
-                const response = await fetch(url, {
+                const response = await fetch(GOOGLE_DIRECT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Esto evita el error CORS pero no podemos leer la respuesta
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                // Con no-cors no podemos leer la respuesta
+                showResult('result-direct', false, {
+                    message: 'Petición enviada pero no se puede leer la respuesta debido a CORS',
+                    nota: 'Esto es normal. Por eso necesitamos el proxy.'
+                });
+            } catch (error) {
+                showResult('result-direct', false, {
+                    error: error.message,
+                    tipo: 'Error de red o CORS'
+                });
+            }
+        }
+
+        // Test 2: Via Netlify Proxy
+        async function testNetlifyProxy() {
+            console.log('Probando conexión via Netlify Proxy...');
+            
+            const testData = {
+                action: 'guardar_respuesta',
+                timestamp: new Date().toISOString(),
+                session_id: 'test_proxy_' + Date.now(),
+                distribucion: {
+                    salud: 50000,
+                    educacion: 45000,
+                    seguridad: 30000,
+                    vivienda: 40000,
+                    movilidad: 30000,
+                    servicios: 0,
+                    deporte: 0,
+                    cultura: 0
+                },
+                imagen_generada: 'NO',
+                imagen_compartida: 'NO',
+                red_compartida: '',
+                formulario_completado: 'NO',
+                nombre: 'Test Proxy',
+                email: '',
+                whatsapp: '',
+                autorizo_contacto: 'NO',
+                ideas: '',
+                dispositivo: 'Test',
+                navegador: 'Test',
+                tiempo_sesion_segundos: 0
+            };
+
+            try {
+                const response = await fetch(NETLIFY_PROXY_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(testData)
                 });
-                
-                const data = await response.text();
-                
-                try {
-                    const jsonData = JSON.parse(data);
-                    showResult('result-post-simple', jsonData, !response.ok);
-                } catch (e) {
-                    showResult('result-post-simple', {
-                        status: response.status,
-                        response: data.substring(0, 500)
-                    }, true);
-                }
+
+                const data = await response.json();
+                showResult('result-proxy', response.ok, data);
             } catch (error) {
-                showResult('result-post-simple', {
-                    error: error.message
-                }, true);
+                showResult('result-proxy', false, {
+                    error: error.message,
+                    nota: 'Asegúrate de que la función de Netlify esté desplegada'
+                });
             }
         }
 
-        // Test POST Completo
-        async function testPostCompleto() {
-            const url = document.getElementById('scriptUrl').value;
-            if (!url) {
-                alert('Por favor ingresa la URL del Google Apps Script');
-                return;
-            }
-
+        // Test 3: Envío completo
+        async function testEnvioCompleto() {
+            console.log('Enviando distribución completa de prueba...');
+            
             const testData = {
                 action: 'guardar_respuesta',
                 timestamp: new Date().toISOString(),
-                session_id: 'test_directo_' + Date.now(),
+                session_id: 'test_completo_' + Date.now(),
                 distribucion: {
                     salud: 60000,
                     educacion: 50000,
@@ -157,61 +203,67 @@
                     cultura: 5000
                 },
                 imagen_generada: 'SI',
-                imagen_compartida: 'NO',
-                red_compartida: '',
-                formulario_completado: 'NO',
-                nombre: 'Test Directo',
-                email: 'test@test.com',
-                whatsapp: '',
+                imagen_compartida: 'SI',
+                red_compartida: 'whatsapp',
+                formulario_completado: 'SI',
+                nombre: 'Juan Pérez',
+                email: 'juan@test.com',
+                whatsapp: '3001234567',
                 autorizo_contacto: 'SI',
-                ideas: 'Esta es una prueba directa del API',
-                dispositivo: 'Test',
-                navegador: 'Test Browser',
-                tiempo_sesion_segundos: 60
+                ideas: 'Creo que deberíamos invertir más en educación y salud, son las bases para el desarrollo.',
+                dispositivo: 'Desktop',
+                navegador: 'Chrome',
+                tiempo_sesion_segundos: 180
             };
 
             try {
-                console.log('Enviando datos completos:', testData);
-                const response = await fetch(url, {
+                const response = await fetch(NETLIFY_PROXY_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(testData)
                 });
-                
-                const data = await response.text();
-                
-                try {
-                    const jsonData = JSON.parse(data);
-                    showResult('result-post-completo', jsonData, !response.ok);
-                    
-                    if (jsonData.success) {
-                        alert('¡Éxito! Revisa tu Google Sheet para ver los datos guardados.');
-                    }
-                } catch (e) {
-                    showResult('result-post-completo', {
-                        status: response.status,
-                        response: data.substring(0, 500)
-                    }, true);
-                }
+
+                const data = await response.json();
+                showResult('result-completo', response.ok, data);
             } catch (error) {
-                showResult('result-post-completo', {
+                showResult('result-completo', false, {
                     error: error.message
-                }, true);
+                });
             }
         }
 
-        // Auto-llenar si hay una URL en localStorage
-        const savedUrl = localStorage.getItem('googleScriptUrl');
-        if (savedUrl) {
-            document.getElementById('scriptUrl').value = savedUrl;
+        // Test 4: Obtener estadísticas
+        async function testObtenerEstadisticas() {
+            console.log('Obteniendo estadísticas...');
+            
+            const requestData = {
+                action: 'obtener_estadisticas'
+            };
+
+            try {
+                const response = await fetch(NETLIFY_PROXY_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const data = await response.json();
+                showResult('result-stats', response.ok, data);
+            } catch (error) {
+                showResult('result-stats', false, {
+                    error: error.message
+                });
+            }
         }
 
-        // Guardar URL cuando cambie
-        document.getElementById('scriptUrl').addEventListener('change', (e) => {
-            localStorage.setItem('googleScriptUrl', e.target.value);
-        });
+        // Log para debugging
+        console.log('Página de prueba cargada. URLs configuradas:');
+        console.log('- Google Direct:', GOOGLE_DIRECT_URL);
+        console.log('- Netlify Proxy:', NETLIFY_PROXY_URL);
     </script>
 </body>
 </html>
