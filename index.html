@@ -502,6 +502,107 @@
             inicializarSliders();
             actualizarContador();
         });
+
+
+           const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwe-QgRbVNEav-97MUsVx2Fb1XZvrN5Yj457k5dV5rq2O_qVB1CHtqsY4PypiBELtnj/exec';
+        
+        // Función para enviar datos a Google Sheets
+        async function enviarDatosAGoogleSheets() {
+            // Recopilar todos los datos
+            const datosParaEnviar = {
+                action: 'guardar_respuesta',
+                timestamp: new Date().toISOString(),
+                session_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                
+                // Distribución
+                distribucion: distribucion,
+                
+                // Comportamiento
+                imagen_generada: imageUrl ? 'SI' : 'NO',
+                imagen_compartida: compartidoEnRedes ? 'SI' : 'NO',
+                red_compartida: redCompartida || '',
+                formulario_completado: formularioCompletado ? 'SI' : 'NO',
+                
+                // Datos opcionales (si los dieron)
+                nombre: document.getElementById('nombre')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                whatsapp: document.getElementById('whatsapp')?.value || '',
+                autorizo_contacto: document.getElementById('autorizo')?.checked ? 'SI' : 'NO',
+                ideas: document.getElementById('ideas')?.value || '',
+                
+                // Datos técnicos
+                dispositivo: screen.width < 768 ? 'Móvil' : 'Desktop',
+                navegador: detectarNavegador(),
+                tiempo_sesion_segundos: Math.floor((Date.now() - tiempoInicio) / 1000)
+            };
+            
+            try {
+                // Mostrar loading
+                console.log('Enviando datos...');
+                
+                // Enviar a Google Sheets
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Importante para Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosParaEnviar)
+                });
+                
+                console.log('Datos enviados exitosamente');
+                
+                // Mostrar mensaje de éxito (opcional)
+                if (document.getElementById('mensaje-exito')) {
+                    document.getElementById('mensaje-exito').style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error enviando datos:', error);
+                // No mostrar error al usuario, guardar localmente como backup
+                localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
+            }
+        }
+        
+        // Función auxiliar para detectar navegador
+        function detectarNavegador() {
+            const agent = navigator.userAgent;
+            if (agent.indexOf('Chrome') > -1) return 'Chrome';
+            if (agent.indexOf('Safari') > -1) return 'Safari';
+            if (agent.indexOf('Firefox') > -1) return 'Firefox';
+            return 'Otro';
+        }
+        
+        // Variable para tracking de tiempo
+        const tiempoInicio = Date.now();
+        let compartidoEnRedes = false;
+        let redCompartida = '';
+        let formularioCompletado = false;
+        
+        // Llamar cuando se complete el presupuesto
+        function alCompletarPresupuesto() {
+            if (totalAsignado === PRESUPUESTO_TOTAL) {
+                // Enviar automáticamente cuando completan la distribución
+                enviarDatosAGoogleSheets();
+            }
+        }
+        
+        // Actualizar cuando compartan
+        function alCompartir(red) {
+            compartidoEnRedes = true;
+            redCompartida = red;
+            enviarDatosAGoogleSheets(); // Actualizar con info de compartir
+        }
+        
+        // Actualizar cuando completen formulario
+        function alEnviarFormulario() {
+            formularioCompletado = true;
+            enviarDatosAGoogleSheets(); // Enviar con datos del formulario
+        }
     </script>
+
+
+     
+    
 </body>
 </html>
