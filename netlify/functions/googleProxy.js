@@ -1,7 +1,7 @@
 // netlify/functions/googleProxy.js
 // Función proxy para manejar comunicación con Google Apps Script
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGGJhHOxQjjSug5mLu1Pkr7dNHsoKRrjfCGIo8gpgqRRvrW7wzbZaDeupKij9MEUPh/exec'; 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoVv2FNdzL18WOm_H2Y6k45uAjSL2mV288IkCshGpotR6TQrkQH0T0m-bpPbReyD4T/exec'; 
 const TIMEOUT_MS = 25000; // 25 segundos (menor que el timeout de Netlify de 26s)
 
 exports.handler = async (event, context) => {
@@ -22,118 +22,106 @@ exports.handler = async (event, context) => {
         };
     }
 
+    // Solo aceptar POST
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            headers,
+            body: JSON.stringify({ 
+                success: false,
+                error: 'Method not allowed. Use POST.' 
+            })
+        };
+    }
+
     try {
         console.log(`[PROXY] Método: ${event.httpMethod}`);
         console.log(`[PROXY] Body:`, event.body);
 
         let requestData;
-
-        // Parsear datos según el método
-        if (event.httpMethod === 'POST') {
-            try {
-                requestData = JSON.parse(event.body || '{}');
-            } catch (e) {
-                console.error('[PROXY] Error parsing POST body:', e);
-                return {
-                    statusCode: 400,
-                    headers,
-                    body: JSON.stringify({ 
-                        success: false,
-                        error: 'Invalid JSON in request body' 
-                    })
-                };
-            }
-        } else {
+        
+        // Parsear datos del POST
+        try {
+            requestData = JSON.parse(event.body || '{}');
+        } catch (e) {
+            console.error('[PROXY] Error parsing POST body:', e);
             return {
-                statusCode: 405,
+                statusCode: 400,
                 headers,
                 body: JSON.stringify({ 
                     success: false,
-                    error: 'Method not allowed. Use POST.' 
+                    error: 'Invalid JSON in request body' 
                 })
             };
         }
 
         console.log(`[PROXY] Enviando a Google Apps Script...`);
+        console.log(`[PROXY] URL: ${GOOGLE_SCRIPT_URL}`);
+        console.log(`[PROXY] Data:`, JSON.stringify(requestData));
         
-        // Usar AbortController para timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => {
-            controller.abort();
-        }, TIMEOUT_MS);
-
+        // Hacer la petición a Google Apps Script
         try {
+            // Usar fetch nativo (Node 18+)
             const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'text/plain', // Cambiar a text/plain
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(requestData),
-                signal: controller.signal,
-                redirect: 'follow' // Importante para manejar redirecciones de Google
+                redirect: 'follow' // Seguir redirecciones automáticamente
             });
 
-            clearTimeout(timeoutId);
-
             console.log(`[PROXY] Respuesta recibida: ${response.status}`);
-
-            // Google Apps Script puede devolver 302 y luego 200
-            if (!response.ok && response.status !== 302) {
-                const errorText = await response.text();
-                console.error(`[PROXY] Error response: ${response.status} - ${errorText}`);
-                
-                return {
-                    statusCode: response.status,
-                    headers,
-                    body: JSON.stringify({
-                        success: false,
-                        error: `Google Apps Script error: ${response.status}`,
-                        details: errorText.substring(0, 500)
-                    })
-                };
-            }
+            console.log(`[PROXY] Headers:`, response.headers);
 
             const responseData = await response.text();
-            console.log(`[PROXY] Respuesta exitosa, tamaño: ${responseData.length} caracteres`);
+            console.log(`[PROXY] Respuesta raw (primeros 200 chars):`, responseData.substring(0, 200));
 
-            // Verificar que sea JSON válido
+            // Intentar parsear como JSON
             try {
                 const jsonData = JSON.parse(responseData);
+                console.log(`[PROXY] Respuesta parseada como JSON exitosamente`);
+                
                 return {
                     statusCode: 200,
                     headers,
                     body: JSON.stringify(jsonData)
                 };
-            } catch (e) {
-                // Si no es JSON, devolver como texto
-                console.log('[PROXY] Respuesta no es JSON, devolviendo como texto');
+            } catch (parseError) {
+                console.log('[PROXY] No es JSON válido, verificando si es HTML de error');
+                
+                // Si contiene HTML, es probable que sea un error de autenticación
+                if (responseData.includes('<!DOCTYPE') || responseData.includes('<html')) {
+                    console.error('[PROXY] Respuesta HTML detectada - posible error de autenticación');
+                    return {
+                        statusCode: 401,
+                        headers,
+                        body: JSON.stringify({
+                            success: false,
+                            error: 'Authentication error from Google Apps Script',
+                            mensaje: 'El script necesita ser re-desplegado con permisos públicos',
+                            solucion: 'En Google Apps Script: Deploy > Manage Deployments > Edit > Who has access: Anyone'
+                        })
+                    };
+                }
+                
+                // Si no es JSON pero tampoco HTML, devolver el texto
                 return {
                     statusCode: 200,
                     headers,
                     body: JSON.stringify({
                         success: true,
-                        message: 'Datos enviados correctamente',
-                        rawResponse: responseData.substring(0, 200)
+                        message: 'Respuesta recibida pero no es JSON',
+                        rawResponse: responseData.substring(0, 500)
                     })
                 };
             }
 
         } catch (fetchError) {
-            clearTimeout(timeoutId);
+            console.error('[PROXY] Error en fetch:', fetchError);
+            console.error('[PROXY] Stack:', fetchError.stack);
             
-            if (fetchError.name === 'AbortError') {
-                console.error(`[PROXY] Timeout después de ${TIMEOUT_MS}ms`);
-                return {
-                    statusCode: 504,
-                    headers,
-                    body: JSON.stringify({
-                        success: false,
-                        error: `Request timeout after ${TIMEOUT_MS}ms`
-                    })
-                };
-            }
-
-            console.error('[PROXY] Fetch error:', fetchError);
             return {
                 statusCode: 502,
                 headers,
@@ -146,7 +134,9 @@ exports.handler = async (event, context) => {
         }
 
     } catch (error) {
-        console.error('[PROXY] General error:', error);
+        console.error('[PROXY] Error general:', error);
+        console.error('[PROXY] Stack:', error.stack);
+        
         return {
             statusCode: 500,
             headers,
