@@ -306,10 +306,8 @@
     <script>
         // Configuración
         const PRESUPUESTO_TOTAL = 195000; // En millones
-        // Usar proxy de Netlify en lugar de conexión directa
+        // Usar proxy de Netlify (IMPORTANTE: no usar la URL directa de Google)
         const BACKEND_URL = '/.netlify/functions/googleProxy';
-        // URL directa como fallback (no funcionará por CORS pero lo dejamos como referencia)
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwe-QgRbVNEav-97MUsVx2Fb1XZvrN5Yj457k5dV5rq2O_qVB1CHtqsY4PypiBELtnj/exec';
         
         let imageUrl = '';
         let compartidoEnRedes = false;
