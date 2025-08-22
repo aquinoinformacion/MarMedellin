@@ -627,17 +627,10 @@
                         console.log(`Eres el participante #${data.estadisticas.total_participantes}`);
                     }
                 } else {
-                    // Si el proxy falla, intentar directamente (solo como fallback)
-                    console.log('Proxy falló, intentando conexión directa...');
-                    await fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(datosParaEnviar)
-                    });
-                    console.log('Datos enviados (sin confirmación por CORS)');
+                    console.error('Error del proxy:', response.status);
+                    // Guardar localmente como backup
+                    localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
+                    console.log('Datos guardados localmente como backup');
                 }
                 
             } catch (error) {
