@@ -1,4 +1,149 @@
 <!-- Gráfico (oculto inicialmente) -->
+                <div id="grafico-container" class="max-w-4xl mx-auto mb-12 hidden">
+                    <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
+                        <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
+                            <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Si yo fuera Alcalde, NO gastaría en caprichos</h3>
+                            <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Invertiría 195 mil millones en:</h3>
+                            <p class="text-gray-700 text-center">Mi propuesta responde a las necesidades que vivo</p>
+                        </div>
+                        <div class="p-6">
+                            <div id="barras-container" class="space-y-4 mb-8">
+                                <!-- Se llenarán con JavaScript -->
+                            </div>
+                            
+                            <div class="text-center">
+                                <button onclick="generarImagen()" class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg" 
+                                        style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                    📸 Generar imagen para compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas oculto -->
+                <canvas id="canvas" style="display: none;"></canvas>
+
+                <!-- Preview y compartir (oculto inicialmente) -->
+                <div id="compartir-container" class="max-w-4xl mx-auto mb-12 hidden">
+                    <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                        <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
+                            <h3 class="text-2xl font-bold text-white text-center">Comparte tu propuesta</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-6">
+                                <img id="imagen-preview" alt="Mi propuesta" class="w-full rounded-lg shadow-lg" />
+                            </div>
+                            <div class="flex flex-wrap gap-4 justify-center">
+                                <button onclick="descargarImagen()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                    ⬇️ Descargar
+                                </button>
+                                <button onclick="compartirEnRedes('twitter')" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                    🐦 X 
+                                </button>
+                                <button onclick="compartirEnRedes('facebook')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                    📘 Facebook
+                                </button>
+                                <button onclick="compartirEnRedes('whatsapp')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                    💬 WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de contacto e ideas -->
+                <div id="formulario-container" class="max-w-4xl mx-auto mb-12 hidden">
+                    <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
+                        <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
+                            <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Tu voz importa</h3>
+                            <p class="text-gray-700 text-center">Únete a la Medellín que tiene clara sus prioridades</p>
+                        </div>
+                        
+                        <form id="formulario-contacto" class="p-6">
+                            <!-- Datos personales opcionales -->
+                            <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(112, 16, 166, 0.05);">
+                                <h4 class="font-bold mb-4" style="color: #7010A6;">Datos de contacto (opcional)</h4>
+                                <p class="text-sm text-gray-600 mb-4">Si deseas recibir actualizaciones sobre esta iniciativa de control político</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                               style="focus:ring-color: #7010A6;"
+                                               placeholder="Tu nombre (opcional)">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                                        <input type="email" id="email" name="email" 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                               style="focus:ring-color: #7010A6;"
+                                               placeholder="tu@email.com (opcional)">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                                        <input type="tel" id="whatsapp" name="whatsapp" 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                               style="focus:ring-color: #7010A6;"
+                                               placeholder="300 123 4567 (opcional)">
+                                    </div>
+                                    
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="autorizo" name="autorizo" class="mr-2" style="accent-color: #7010A6;">
+                                        <label for="autorizo" class="text-sm text-gray-700">
+                                            Autorizo el uso de mis datos para esta iniciativa
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Campo de ideas -->
+                            <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
+                                <h4 class="font-bold mb-4" style="color: #7010A6;">Comparte tus ideas</h4>
+                                <p class="text-sm text-gray-600 mb-4">¿Qué otras propuestas tienes para mejorar Medellín? (máximo 200 palabras)</p>
+                                
+                                <textarea id="ideas" name="ideas" rows="5" maxlength="1000"
+                                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                          style="focus:ring-color: #FCD700;"
+                                          placeholder="Cuéntanos tus ideas para un mejor uso de los recursos públicos..."></textarea>
+                                <div class="text-right text-sm text-gray-500 mt-1">
+                                    <span id="contador-caracteres">0</span>/1000 caracteres
+                                </div>
+                            </div>
+                            
+                            <!-- Botón de envío -->
+                            <div class="text-center">
+                                <button type="submit" id="btn-enviar" 
+                                        class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg"
+                                        style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                    Enviar mi propuesta ciudadana
+                                </button>
+                                <div id="mensaje-enviando" class="hidden mt-4">
+                                    <div class="loading-spinner mx-auto"></div>
+                                    <p class="text-sm text-gray-600 mt-2">Enviando...</p>
+                                </div>
+                                <div id="mensaje-exito" class="hidden mt-4 p-4 bg-green-50 border border-green-400 text-green-700 rounded-lg">
+                                    ✓ ¡Gracias por participar! Tu voz ha sido registrada.
+                                </div>
+                                <div id="mensaje-error" class="hidden mt-4 p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
+                                    ✗ Hubo un error. Por favor intenta de nuevo.
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer class="text-center py-8 text-gray-600 max-w-4xl mx-auto">
+                    <div class="border-t pt-6" style="border-color: rgba(112, 16, 166, 0.2);">
+                        <p class="mb-2 font-semibold" style="color: #7010A6;">Medellín reflexiona sobre sus necesidades</p>
+                        <p class="text-sm">¿Qué es lo único que le hace falta a Medellín?<br>
+                        Por más derechos y menos caprichos; control político ciudadano.</p>
+                    </div>
+                </footer>                <!-- Gráfico (oculto inicialmente) -->
                 <div id="grafico-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12 hidden" style="border: 2px solid #FCD700;">
                     <div class="p-6" style="background-color: #FCD700; border-radius: 0.75rem 0.75rem 0 0;">
                         <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Si yo fuera Alcalde, NO gastaría en caprichos</h3>
@@ -199,25 +344,25 @@
                              class="w-full rounded-xl shadow-lg">
                     </div>
                     
-                    <h1 class="text-3xl md:text-5xl font-bold mb-8" style="color: #7010A6;">
+                    <h1 class="text-2xl md:text-4xl font-bold mb-8" style="color: #7010A6;">
                         ¿195 mil millones en piscinas mientras Medellín se ahoga en problemas reales?
                     </h1>
                     
                     <!-- Contenedor principal con mismo ancho que la imagen -->
                     <div class="max-w-4xl mx-auto space-y-6">
                         <!-- Estadísticas de pobreza -->
-                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #7010A6;">
+                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
                             <h3 class="text-xl font-bold mb-4" style="color: #7010A6;">Mientras el Alcalde sueña con playas artificiales, Medellín enfrenta:</h3>
                             <div class="grid md:grid-cols-3 gap-4 text-sm">
-                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
                                     <div class="text-2xl font-bold" style="color: #7010A6;">313,257</div>
                                     <div class="text-gray-600">personas en pobreza multidimensional</div>
                                 </div>
-                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
                                     <div class="text-2xl font-bold" style="color: #7010A6;">221,000</div>
                                     <div class="text-gray-600">personas con inseguridad alimentaria severa</div>
                                 </div>
-                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
                                     <div class="text-2xl font-bold" style="color: #7010A6;">128,000</div>
                                     <div class="text-gray-600">personas viviendo en hacinamiento</div>
                                 </div>
@@ -225,8 +370,8 @@
                         </div>
                         
                         <!-- Mensaje central -->
-                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #FCD700;">
-                            <p class="text-lg text-gray-700 mb-4 font-semibold">
+                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(252, 215, 0, 0.05);">
+                            <p class="text-lg font-semibold mb-2" style="color: #7010A6;">
                                 ¿Es el mar una prioridad en Medellín cuando hay otras necesidades sin resolver?
                             </p>
                             <p class="text-gray-600">
@@ -235,32 +380,32 @@
                         </div>
                         
                         <!-- Alternativas de inversión -->
-                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #7010A6;">
-                            <h3 class="text-2xl font-bold mb-6" style="color: #7010A6;">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos:</h3>
+                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                            <h3 class="text-xl font-bold mb-6" style="color: #7010A6;">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos:</h3>
                             
                             <div class="grid md:grid-cols-2 gap-4">
-                                <div class="text-center p-6 rounded-lg" style="background-color: #FCD700; background-opacity: 0.1;">
+                                <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
                                     <div class="text-4xl mb-3">🏠</div>
                                     <div class="text-2xl font-bold text-gray-800 mb-2">650 casas</div>
                                     <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
                                     <div class="text-base font-semibold" style="color: #7010A6;">1 de cada 10 familias de Belén</div>
                                 </div>
                                 
-                                <div class="text-center p-6 rounded-lg" style="background-color: #7010A6; background-opacity: 0.1;">
+                                <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
                                     <div class="text-4xl mb-3">🏫</div>
                                     <div class="text-2xl font-bold text-gray-800 mb-2">5 mega colegios</div>
                                     <div class="text-sm text-gray-600 mb-2">para atender más de 8000 estudiantes</div>
                                     <div class="text-base font-semibold" style="color: #7010A6;">y asegurar la cobertura con criterios de calidad</div>
                                 </div>
                                 
-                                <div class="text-center p-6 rounded-lg" style="background-color: #FCD700; background-opacity: 0.1;">
+                                <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
                                     <div class="text-4xl mb-3">🛠️</div>
                                     <div class="text-2xl font-bold text-gray-800 mb-2">6,845 metros</div>
                                     <div class="text-sm text-gray-600 mb-2">obras de estabilización</div>
                                     <div class="text-base font-semibold" style="color: #7010A6;">para prevenir accidentes mortales</div>
                                 </div>
                                 
-                                <div class="text-center p-6 rounded-lg" style="background-color: #7010A6; background-opacity: 0.1;">
+                                <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
                                     <div class="text-4xl mb-3">🎓</div>
                                     <div class="text-2xl font-bold text-gray-800 mb-2">32,500 semestres</div>
                                     <div class="text-sm text-gray-600 mb-2">universitarios</div>
@@ -270,7 +415,7 @@
                         </div>
                         
                         <!-- Call to action -->
-                        <div class="rounded-xl p-6 text-white shadow-lg" style="background-color: #7010A6;">
+                        <div class="rounded-xl p-6 text-white shadow-lg" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
                             <p class="text-lg font-semibold text-center mb-2">
                                 El "mar" es el capricho de uno. Las necesidades son de todos.
                             </p>
@@ -282,47 +427,49 @@
                 </header>
 
                 <!-- Distribuidor de presupuesto -->
-                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12" style="border: 2px solid #7010A6;">
-                    <div class="text-center p-6" style="background-color: #7010A6; border-radius: 0.75rem 0.75rem 0 0;">
-                        <h2 class="text-2xl font-bold text-white mb-2">Es hora de que Medellín realmente decida</h2>
-                        <p class="text-gray-100">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
-                        <p class="text-sm text-white font-semibold mt-2" style="color: #FCD700;">💡 Tip: Las barras se mueven en incrementos de $1,000 millones</p>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="grid lg:grid-cols-3 gap-8">
-                            <!-- Sliders (2 columnas en desktop) -->
-                            <div class="lg:col-span-2">
-                                <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
-                                    <!-- Se llenarán con JavaScript -->
+                <div class="max-w-4xl mx-auto mb-12">
+                    <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                        <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
+                            <h2 class="text-2xl font-bold text-white mb-2">Es hora de que Medellín realmente decida</h2>
+                            <p class="text-gray-100">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
+                            <p class="text-sm font-semibold mt-2" style="color: #FCD700;">💡 Tip: Las barras se mueven en incrementos de $1,000 millones</p>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="grid lg:grid-cols-3 gap-8">
+                                <!-- Sliders (2 columnas en desktop) -->
+                                <div class="lg:col-span-2">
+                                    <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
+                                        <!-- Se llenarán con JavaScript -->
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <!-- Contador lateral -->
-                            <div class="lg:col-span-1">
-                                <div class="sticky top-4 bg-white rounded-xl p-6 text-center shadow-md" style="border: 2px solid #FCD700;">
-                                    <h3 class="text-lg font-bold mb-4" style="color: #7010A6;">Presupuesto por distribuir</h3>
-                                    <div id="contador" class="text-4xl font-bold mb-2" style="color: #FCD700;">
-                                        $195,000
-                                    </div>
-                                    <div class="text-lg text-gray-700 mb-4">
-                                        millones de pesos
-                                    </div>
-                                    <div id="estado-texto" class="text-sm text-gray-600 mb-4">
-                                        Distribuye el presupuesto completo
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
-                                        <div id="barra-progreso" class="h-4 rounded-full transition-all duration-300" 
-                                             style="width: 0%; background: linear-gradient(to right, #7010A6, #FCD700);"></div>
-                                    </div>
-                                    <div id="mensaje-completado" class="hidden">
-                                        <div class="text-green-600 font-bold text-lg mb-3">
-                                            ✓ ¡Presupuesto redistribuido!
+                                
+                                <!-- Contador lateral -->
+                                <div class="lg:col-span-1">
+                                    <div class="sticky top-4 bg-white rounded-xl p-6 text-center shadow-md" style="background: rgba(252, 215, 0, 0.05);">
+                                        <h3 class="text-lg font-bold mb-4" style="color: #7010A6;">Presupuesto por distribuir</h3>
+                                        <div id="contador" class="text-4xl font-bold mb-2" style="color: #7010A6;">
+                                            $195,000
                                         </div>
-                                        <button onclick="scrollToGrafico()" class="text-white font-bold py-3 px-6 rounded-lg transition-colors" 
-                                                style="background-color: #7010A6;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                                            Ver mi propuesta ciudadana ↓
-                                        </button>
+                                        <div class="text-lg text-gray-700 mb-4">
+                                            millones de pesos
+                                        </div>
+                                        <div id="estado-texto" class="text-sm text-gray-600 mb-4">
+                                            Distribuye el presupuesto completo
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                            <div id="barra-progreso" class="h-4 rounded-full transition-all duration-300" 
+                                                 style="width: 0%; background: linear-gradient(to right, #7010A6, #FCD700);"></div>
+                                        </div>
+                                        <div id="mensaje-completado" class="hidden">
+                                            <div class="text-green-600 font-bold text-lg mb-3">
+                                                ✓ ¡Presupuesto redistribuido!
+                                            </div>
+                                            <button onclick="scrollToGrafico()" class="text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg" 
+                                                    style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                                Ver mi propuesta ciudadana ↓
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -801,8 +948,8 @@
             
             categorias.forEach(cat => {
                 const sliderDiv = document.createElement('div');
-                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm border';
-                sliderDiv.style.borderColor = cat.color;
+                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm';
+                sliderDiv.style.background = `rgba(${cat.color === '#7010A6' ? '112, 16, 166' : '252, 215, 0'}, 0.05)`;
                 sliderDiv.innerHTML = `
                     <div class="mb-4">
                         <div class="flex items-center justify-between mb-3">
