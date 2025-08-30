@@ -654,9 +654,10 @@
             const barraProgreso = document.getElementById('barra-progreso');
             const mensajeCompletado = document.getElementById('mensaje-completado');
             const graficoContainer = document.getElementById('grafico-container');
+            const compartirContainer = document.getElementById('compartir-container');
             const formularioContainer = document.getElementById('formulario-container');
             
-            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
+            contador.textContent = `${formatearMiles(Math.abs(restante))}`;
             barraProgreso.style.width = `${porcentajeAsignado}%`;
             
             if (restante === 0) {
@@ -666,15 +667,19 @@
                 mensajeCompletado.classList.remove('hidden');
                 graficoContainer.classList.remove('hidden');
                 formularioContainer.classList.remove('hidden');
+                // Ocultar compartir hasta que generen la imagen
+                compartirContainer.classList.add('hidden');
                 actualizarGrafico();
                 // Enviar datos automáticamente cuando completan la distribución
                 enviarDatosAGoogleSheets();
             } else if (restante > 0) {
-                contador.className = 'text-4xl font-bold text-yellow-600 mb-2';
+                contador.className = 'text-4xl font-bold mb-2';
+                contador.style.color = '#7010A6';
                 estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
                 estadoTexto.className = 'text-sm text-gray-600 mb-4';
                 mensajeCompletado.classList.add('hidden');
                 graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
                 formularioContainer.classList.add('hidden');
             } else {
                 contador.className = 'text-4xl font-bold text-red-600 mb-2';
@@ -682,6 +687,7 @@
                 estadoTexto.className = 'text-sm text-red-600 mb-4';
                 mensajeCompletado.classList.add('hidden');
                 graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
                 formularioContainer.classList.add('hidden');
             }
         }
