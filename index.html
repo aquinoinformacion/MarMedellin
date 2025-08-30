@@ -1,4 +1,134 @@
-<!DOCTYPE html>
+<!-- Gráfico (oculto inicialmente) -->
+                <div id="grafico-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12 hidden" style="border: 2px solid #FCD700;">
+                    <div class="p-6" style="background-color: #FCD700; border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Si yo fuera Alcalde, NO gastaría en caprichos</h3>
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Invertiría 195 mil millones en:</h3>
+                        <p class="text-gray-700 text-center">Mi propuesta responde a las necesidades que vivo</p>
+                    </div>
+                    <div class="p-6">
+                        <div id="barras-container" class="space-y-4 mb-8">
+                            <!-- Se llenarán con JavaScript -->
+                        </div>
+                        
+                        <div class="text-center">
+                            <button onclick="generarImagen()" class="text-white font-bold py-3 px-8 rounded-lg transition-colors" 
+                                    style="background-color: #7010A6;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                📸 Generar imagen para compartir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas oculto -->
+                <canvas id="canvas" style="display: none;"></canvas>
+
+                <!-- Preview y compartir (oculto inicialmente) -->
+                <div id="compartir-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12 hidden" style="border: 2px solid #7010A6;">
+                    <div class="p-6" style="background-color: #7010A6; border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-white text-center">Comparte tu propuesta</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <img id="imagen-preview" alt="Mi propuesta" class="w-full rounded-lg shadow-lg" />
+                        </div>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <button onclick="descargarImagen()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                                ⬇️ Descargar
+                            </button>
+                            <button onclick="compartirEnRedes('twitter')" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                                🐦 X 
+                            </button>
+                            <button onclick="compartirEnRedes('facebook')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                                📘 Facebook
+                            </button>
+                            <button onclick="compartirEnRedes('whatsapp')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                                💬 WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de contacto e ideas -->
+                <div id="formulario-container" class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12 hidden" style="border: 2px solid #FCD700;">
+                    <div class="p-6" style="background-color: #FCD700; border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Tu voz importa</h3>
+                        <p class="text-gray-700 text-center">Únete a la Medellín que tiene clara sus prioridades</p>
+                    </div>
+                    
+                    <form id="formulario-contacto" class="p-6">
+                        <!-- Datos personales opcionales -->
+                        <div class="rounded-xl p-6 mb-6" style="background-color: rgba(112, 16, 166, 0.05); border: 1px solid #7010A6;">
+                            <h4 class="font-bold mb-4" style="color: #7010A6;">Datos de contacto (opcional)</h4>
+                            <p class="text-sm text-gray-600 mb-4">Si deseas recibir actualizaciones sobre esta iniciativa de control político</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="Tu nombre (opcional)">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                                    <input type="email" id="email" name="email" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="tu@email.com (opcional)">
+                                </div>
+                                
+                                <div>
+                                    <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                                    <input type="tel" id="whatsapp" name="whatsapp" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="300 123 4567 (opcional)">
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="autorizo" name="autorizo" class="mr-2" style="accent-color: #7010A6;">
+                                    <label for="autorizo" class="text-sm text-gray-700">
+                                        Autorizo el uso de mis datos para esta iniciativa
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Campo de ideas -->
+                        <div class="rounded-xl p-6 mb-6" style="background-color: rgba(252, 215, 0, 0.1); border: 1px solid #FCD700;">
+                            <h4 class="font-bold mb-4" style="color: #7010A6;">Comparte tus ideas</h4>
+                            <p class="text-sm text-gray-600 mb-4">¿Qué otras propuestas tienes para mejorar Medellín? (máximo 200 palabras)</p>
+                            
+                            <textarea id="ideas" name="ideas" rows="5" maxlength="1000"
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                      style="focus:ring-color: #FCD700;"
+                                      placeholder="Cuéntanos tus ideas para un mejor uso de los recursos públicos..."></textarea>
+                            <div class="text-right text-sm text-gray-500 mt-1">
+                                <span id="contador-caracteres">0</span>/1000 caracteres
+                            </div>
+                        </div>
+                        
+                        <!-- Botón de envío -->
+                        <div class="text-center">
+                            <button type="submit" id="btn-enviar" 
+                                    class="text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                                    style="background-color: #7010A6;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                Enviar mi propuesta ciudadana
+                            </button>
+                            <div id="mensaje-enviando" class="hidden mt-4">
+                                <div class="loading-spinner mx-auto"></div>
+                                <p class="text-sm text-gray-600 mt-2">Enviando...</p>
+                            </div>
+                            <div id="mensaje-exito" class="hidden mt-4 p-4 bg-green-50 border border-green-400 text-green-700 rounded-lg">
+                                ✓ ¡Gracias por participar! Tu voz ha sido registrada.
+                            </div>
+                            <div id="mensaje-error" class="hidden mt-4 p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
+                                ✗ Hubo un error. Por favor intenta de nuevo.
+                            </div>
+                        </div>
+                    </form>
+                </div><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +139,8 @@
         .slider {
             -webkit-appearance: none;
             appearance: none;
-            height: 10px;
-            border-radius: 5px;
+            height: 12px;
+            border-radius: 6px;
             background: #e5e7eb;
             outline: none;
             transition: all 0.3s ease;
@@ -18,20 +148,26 @@
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: #7010A6;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
+            transition: all 0.2s ease;
+        }
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(112, 16, 166, 0.4);
         }
         .slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: #7010A6;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
+            border: none;
         }
         .slider:hover {
             opacity: 0.9;
@@ -56,113 +192,138 @@
         <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
             <div class="max-w-7xl mx-auto px-4 py-8">
                 <!-- Header -->
-                <header class="text-center mb-10">
+                <header class="text-center mb-12">
                     <!-- Imagen del header -->
-                    <div class="mb-8">
+                    <div class="max-w-4xl mx-auto mb-8">
                         <img src="HeaderMaryplaya.png" alt="Header Mar y Playa Medellín" 
-                             class="w-full max-w-6xl mx-auto rounded-lg shadow-lg">
+                             class="w-full rounded-xl shadow-lg">
                     </div>
                     
-                    <h1 class="text-3xl md:text-5xl font-bold text-purple-900 mb-6">
+                    <h1 class="text-3xl md:text-5xl font-bold mb-8" style="color: #7010A6;">
                         ¿195 mil millones en piscinas mientras Medellín se ahoga en problemas reales?
                     </h1>
                     
-                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                        <h3 class="text-xl font-bold text-red-900 mb-3">Mientras el Alcalde sueña con playas artificiales, Medellín enfrenta:</h3>
-                        <div class="grid md:grid-cols-2 gap-3 text-sm">
-                            <div>• <strong>313,257 personas</strong> viviendo en pobreza multidimensional</div>
-                            <div>• <strong>221.000 personas</strong> con inseguridad alimentaria severa</div>
-                            <div>• <strong>128.000 personas</strong> viviendo en hacinamiento</div>
-                        </div>
-                    </div>
-                    
-                    <p class="text-lg text-gray-700 mb-6">
-                        <strong>¿Es el mar una prioridad en Medellín cuando hay otras necesidades sin resolver?</strong> 
-                        Esta respuesta parece más un capricho personal que una solución a lo que Medellín realmente necesita.
-                    </p>
-                    
-                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos::</h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-4 text-center">
-                        <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
-                            <div class="text-5xl mb-2">🏠</div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">650 casas</div>
-                            <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
-                            <div class="text-lg font-semibold text-yellow-700">1 de cada 10 familias de Belén</div>
+                    <!-- Contenedor principal con mismo ancho que la imagen -->
+                    <div class="max-w-4xl mx-auto space-y-6">
+                        <!-- Estadísticas de pobreza -->
+                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #7010A6;">
+                            <h3 class="text-xl font-bold mb-4" style="color: #7010A6;">Mientras el Alcalde sueña con playas artificiales, Medellín enfrenta:</h3>
+                            <div class="grid md:grid-cols-3 gap-4 text-sm">
+                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-2xl font-bold" style="color: #7010A6;">313,257</div>
+                                    <div class="text-gray-600">personas en pobreza multidimensional</div>
+                                </div>
+                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-2xl font-bold" style="color: #7010A6;">221,000</div>
+                                    <div class="text-gray-600">personas con inseguridad alimentaria severa</div>
+                                </div>
+                                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                    <div class="text-2xl font-bold" style="color: #7010A6;">128,000</div>
+                                    <div class="text-gray-600">personas viviendo en hacinamiento</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-                            <div class="text-5xl mb-2">🏫</div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">5 mega colegios</div>
-                            <div class="text-sm text-gray-600 mb-2"> para atender más de 8000 estudiantes</div>
-                            <div class="text-lg font-semibold text-green-700"> y asegurar la cobertura con criterios de calidad en las comunas del norte</div>
+                        <!-- Mensaje central -->
+                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #FCD700;">
+                            <p class="text-lg text-gray-700 mb-4 font-semibold">
+                                ¿Es el mar una prioridad en Medellín cuando hay otras necesidades sin resolver?
+                            </p>
+                            <p class="text-gray-600">
+                                Esta respuesta parece más un capricho personal que una solución a lo que Medellín realmente necesita.
+                            </p>
                         </div>
                         
-                        <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-                            <div class="text-5xl mb-2">🛠️</div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">6,845 metros </div>
-                            <div class="text-sm text-gray-600 mb-2">obras de estabilización</div>
-                            <div class="text-lg font-semibold text-blue-700">para prevenir tragedias mortales</div>
+                        <!-- Alternativas de inversión -->
+                        <div class="bg-white border-2 rounded-xl p-6 shadow-lg" style="border-color: #7010A6;">
+                            <h3 class="text-2xl font-bold mb-6" style="color: #7010A6;">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos:</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="text-center p-6 rounded-lg" style="background-color: #FCD700; background-opacity: 0.1;">
+                                    <div class="text-4xl mb-3">🏠</div>
+                                    <div class="text-2xl font-bold text-gray-800 mb-2">650 casas</div>
+                                    <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
+                                    <div class="text-base font-semibold" style="color: #7010A6;">1 de cada 10 familias de Belén</div>
+                                </div>
+                                
+                                <div class="text-center p-6 rounded-lg" style="background-color: #7010A6; background-opacity: 0.1;">
+                                    <div class="text-4xl mb-3">🏫</div>
+                                    <div class="text-2xl font-bold text-gray-800 mb-2">5 mega colegios</div>
+                                    <div class="text-sm text-gray-600 mb-2">para atender más de 8000 estudiantes</div>
+                                    <div class="text-base font-semibold" style="color: #7010A6;">y asegurar la cobertura con criterios de calidad</div>
+                                </div>
+                                
+                                <div class="text-center p-6 rounded-lg" style="background-color: #FCD700; background-opacity: 0.1;">
+                                    <div class="text-4xl mb-3">🛠️</div>
+                                    <div class="text-2xl font-bold text-gray-800 mb-2">6,845 metros</div>
+                                    <div class="text-sm text-gray-600 mb-2">obras de estabilización</div>
+                                    <div class="text-base font-semibold" style="color: #7010A6;">para prevenir accidentes mortales</div>
+                                </div>
+                                
+                                <div class="text-center p-6 rounded-lg" style="background-color: #7010A6; background-opacity: 0.1;">
+                                    <div class="text-4xl mb-3">🎓</div>
+                                    <div class="text-2xl font-bold text-gray-800 mb-2">32,500 semestres</div>
+                                    <div class="text-sm text-gray-600 mb-2">universitarios</div>
+                                    <div class="text-base font-semibold" style="color: #7010A6;">todos los jóvenes de Popular y Santa Cruz</div>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
-                            <div class="text-5xl mb-2">🎓</div>
-                            <div class="text-3xl font-bold text-gray-800 mb-1">32,500 semestres</div>
-                            <div class="text-sm text-gray-600 mb-2">universitarios</div>
-                            <div class="text-lg font-semibold text-purple-700">todos los jóvenes de Popular y Santa Cruz</div>
+                        <!-- Call to action -->
+                        <div class="rounded-xl p-6 text-white shadow-lg" style="background-color: #7010A6;">
+                            <p class="text-lg font-semibold text-center mb-2">
+                                El "mar" es el capricho de uno. Las necesidades son de todos.
+                            </p>
+                            <p class="text-xl font-bold text-center" style="color: #FCD700;">
+                                Si tú fueras alcalde que priorizarías para Medellín, ¿caprichos o necesidades?
+                            </p>
                         </div>
-                    </div>
-                    
-                    <div class="mt-6 p-4 bg-purple-900 text-white rounded-lg">
-                        <p class="text-lg font-semibold text-center">
-                            El "mar" es el capricho de uno. Las necesidades son de todos.
-                        </p>
-                        <p class="text-xl font-bold text-center text-yellow-300 mt-2">
-                            Si tú fueras alcalde que priorizarías para Medellín, ¿caprichos o necesidades?
-                        </p>
                     </div>
                 </header>
 
                 <!-- Distribuidor de presupuesto -->
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-                    <div class="text-center mb-6">
-                        <h2 class="text-2xl font-bold text-purple-900 mb-2">Es hora de que Medellín realmente decida</h2>
-                        <p class="text-gray-600">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
-                        <p class="text-sm text-yellow-600 font-semibold mt-2">💡 Tip: Las barras se mueven en incrementos de $1,000 millones para facilitar la distribución exacta</p>
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg mb-12" style="border: 2px solid #7010A6;">
+                    <div class="text-center p-6" style="background-color: #7010A6; border-radius: 0.75rem 0.75rem 0 0;">
+                        <h2 class="text-2xl font-bold text-white mb-2">Es hora de que Medellín realmente decida</h2>
+                        <p class="text-gray-100">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
+                        <p class="text-sm text-white font-semibold mt-2" style="color: #FCD700;">💡 Tip: Las barras se mueven en incrementos de $1,000 millones</p>
                     </div>
                     
-                    <div class="grid lg:grid-cols-3 gap-6">
-                        <!-- Sliders (2 columnas en desktop) -->
-                        <div class="lg:col-span-2">
-                            <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
-                                <!-- Se llenarán con JavaScript -->
+                    <div class="p-6">
+                        <div class="grid lg:grid-cols-3 gap-8">
+                            <!-- Sliders (2 columnas en desktop) -->
+                            <div class="lg:col-span-2">
+                                <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
+                                    <!-- Se llenarán con JavaScript -->
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Contador lateral -->
-                        <div class="lg:col-span-1">
-                            <div class="sticky top-4 bg-gradient-to-br from-purple-100 to-yellow-100 rounded-lg p-6 text-center">
-                                <h3 class="text-lg font-bold text-purple-900 mb-4">Presupuesto por distribuir</h3>
-                                <div id="contador" class="text-4xl font-bold text-yellow-600 mb-2">
-                                    $195,000
-                                </div>
-                                <div class="text-lg text-gray-700 mb-4">
-                                    millones de pesos
-                                </div>
-                                <div id="estado-texto" class="text-sm text-gray-600 mb-4">
-                                    Distribuye el presupuesto completo
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
-                                    <div id="barra-progreso" class="bg-gradient-to-r from-purple-600 to-yellow-500 h-4 rounded-full transition-all duration-300" 
-                                         style="width: 0%"></div>
-                                </div>
-                                <div id="mensaje-completado" class="hidden">
-                                    <div class="text-green-600 font-bold text-lg mb-3">
-                                        ✓ ¡Presupuesto redistribuido!
+                            
+                            <!-- Contador lateral -->
+                            <div class="lg:col-span-1">
+                                <div class="sticky top-4 bg-white rounded-xl p-6 text-center shadow-md" style="border: 2px solid #FCD700;">
+                                    <h3 class="text-lg font-bold mb-4" style="color: #7010A6;">Presupuesto por distribuir</h3>
+                                    <div id="contador" class="text-4xl font-bold mb-2" style="color: #FCD700;">
+                                        $195,000
                                     </div>
-                                    <button onclick="scrollToGrafico()" class="bg-purple-700 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-lg">
-                                        Ver mi propuesta ciudadana ↓
-                                    </button>
+                                    <div class="text-lg text-gray-700 mb-4">
+                                        millones de pesos
+                                    </div>
+                                    <div id="estado-texto" class="text-sm text-gray-600 mb-4">
+                                        Distribuye el presupuesto completo
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                        <div id="barra-progreso" class="h-4 rounded-full transition-all duration-300" 
+                                             style="width: 0%; background: linear-gradient(to right, #7010A6, #FCD700);"></div>
+                                    </div>
+                                    <div id="mensaje-completado" class="hidden">
+                                        <div class="text-green-600 font-bold text-lg mb-3">
+                                            ✓ ¡Presupuesto redistribuido!
+                                        </div>
+                                        <button onclick="scrollToGrafico()" class="text-white font-bold py-3 px-6 rounded-lg transition-colors" 
+                                                style="background-color: #7010A6;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                            Ver mi propuesta ciudadana ↓
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -285,10 +446,12 @@
                 </div>
 
                 <!-- Footer -->
-                <footer class="text-center py-8 text-gray-600">
-                    <p class="mb-2">Medellín reflexiona sobre sus necesidades</p>
-                    <p class="text-xs mt-4">¿Qué es lo único que le hace falta a Medellín?
-Por más derechos y menos caprichos; control político ciudadano.</p>
+                <footer class="text-center py-8 text-gray-600 max-w-4xl mx-auto">
+                    <div class="border-t pt-6" style="border-color: #7010A6;">
+                        <p class="mb-2 font-semibold" style="color: #7010A6;">Medellín reflexiona sobre sus necesidades</p>
+                        <p class="text-sm">¿Qué es lo único que le hace falta a Medellín?<br>
+                        Por más derechos y menos caprichos; control político ciudadano.</p>
+                    </div>
                 </footer>
             </div>
         </div>
@@ -307,14 +470,14 @@ Por más derechos y menos caprichos; control político ciudadano.</p>
         const tiempoInicio = Date.now();
         
         const categorias = [
-            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#FF6B6B' },
-            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#4ECDC4' },
-            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#45B7D1' },
-            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#96CEB4' },
-            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#FFEAA7' },
-            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#DDA0DD' },
-            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#98D8C8' },
-            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#F7DC6F' }
+            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#7010A6' },
+            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#FCD700' },
+            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#8B2CA3' },
+            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#E6C200' },
+            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#7010A6' },
+            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#FCD700' },
+            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#8B2CA3' },
+            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#E6C200' }
         ];
 
         // Estado de distribución
@@ -638,21 +801,22 @@ Por más derechos y menos caprichos; control político ciudadano.</p>
             
             categorias.forEach(cat => {
                 const sliderDiv = document.createElement('div');
-                sliderDiv.className = 'bg-gray-50 p-4 rounded-lg';
+                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm border';
+                sliderDiv.style.borderColor = cat.color;
                 sliderDiv.innerHTML = `
-                    <div class="mb-3">
-                        <div class="flex items-center justify-between mb-2">
-                            <label class="flex items-center gap-2 font-semibold text-gray-700">
-                                <span class="text-2xl">${cat.emoji}</span>
-                                <span class="text-sm">${cat.nombre}</span>
-                                <div class="text-sm text-gray-500 mt-1">
-                                    Ajusta en incrementos de mil millones
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">${cat.emoji}</span>
+                                <div>
+                                    <div class="font-bold text-gray-800">${cat.nombre}</div>
+                                    <div class="text-xs text-gray-500">Incrementos de $1,000M</div>
                                 </div>
-                            </label>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-between text-sm mb-2">
-                            <span id="porcentaje-${cat.id}" class="text-gray-600">0%</span>
-                            <span id="valor-${cat.id}" class="font-bold text-purple-900">$0M</span>
+                        <div class="flex items-center justify-between text-sm mb-3">
+                            <span id="porcentaje-${cat.id}" class="text-gray-600 font-medium">0%</span>
+                            <span id="valor-${cat.id}" class="font-bold" style="color: ${cat.color};">$0M</span>
                         </div>
                         <input
                             type="range"
