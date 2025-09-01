@@ -1,7 +1,7 @@
 // netlify/functions/googleProxy.js
 // Función proxy para manejar comunicación con Google Apps Script
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnaFiwMBEB6jynR0hoA9uotedxVlQdm95aC3izxXbHt73-B38mvmy8YFwSMi67rlQs/exec'; 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYw7OyM5EhgTAvAo2eOLo5MTCU80ttivHBApjSXaDIFkkP7VwXlWCtl8eflMCpV86d/exec'; 
 const TIMEOUT_MS = 25000; // 25 segundos (menor que el timeout de Netlify de 26s)
 
 exports.handler = async (event, context) => {
