@@ -64,14 +64,12 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-WG7JLVDS');</script>
   <!-- End Google Tag Manager -->
-    
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG7JLVDS"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  
     <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
         <div class="max-w-7xl mx-auto px-4 py-8">
             
@@ -366,7 +364,344 @@
     </div>
 
     <script>
-        // Configuración
+        // Actualizar gráfico de barras
+        function actualizarGrafico() {
+            const container = document.getElementById('barras-container');
+            container.innerHTML = '';
+            
+            // Ordenar categorías por valor de mayor a menor
+            const categoriasOrdenadas = [...categorias].sort((a, b) => 
+                distribucion[b.id] - distribucion[a.id]
+            ).filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach(cat => {
+                const valor = distribucion[cat.id];
+                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
+                
+                const barra = document.createElement('div');
+                barra.className = 'flex items-center gap-3';
+                barra.innerHTML = `
+                    <div class="w-36 text-right flex items-center justify-end gap-2">
+                        <span class="text-2xl">${cat.emoji}</span>
+                        <span class="text-sm font-semibold">${cat.nombre}</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-gray-200 rounded-full h-10 relative overflow-hidden">
+                            <div class="h-10 rounded-full flex items-center justify-end pr-3 transition-all duration-500" 
+                                 style="width: ${porcentaje}%; background-color: ${cat.color}">
+                                <span class="text-sm font-bold text-white">${porcentaje.toFixed(1)}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-28 text-right font-bold" style="color: #7010A6;">
+                        ${formatearMiles(valor)}M
+                    </div>
+                `;
+                container.appendChild(barra);
+            });
+        }
+
+        // Generar imagen
+        function generarImagen() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 1200;
+            canvas.height = 630;
+            
+            // Fondo blanco
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, 1200, 630);
+            
+            // Header morado
+            ctx.fillStyle = '#7010A6';
+            ctx.fillRect(0, 0, 1200, 120);
+            
+            // Título
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Si yo fuera Alcalde invertiría 195 mil millones en:', 600, 70);
+            
+            // Subtítulo
+            ctx.fillStyle = '#FCD700';
+            ctx.font = '20px Arial';
+            ctx.fillText('Esta es mi propuesta de distribución presupuestal', 600, 100);
+            
+            // Dibujar barras
+            const startY = 150;
+            const barHeight = 45;
+            const maxBarWidth = 650;
+            const startX = 280;
+            
+            // Ordenar y filtrar categorías
+            const categoriasOrdenadas = [...categorias]
+                .sort((a, b) => distribucion[b.id] - distribucion[a.id])
+                .filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach((cat, index) => {
+                const y = startY + (index * (barHeight + 8));
+                const valor = distribucion[cat.id];
+                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
+                const barWidth = (porcentaje / 100) * maxBarWidth;
+                
+                // Emoji y nombre
+                ctx.font = '20px Arial';
+                ctx.fillStyle = '#333333';
+                ctx.textAlign = 'right';
+                ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 15, y + 28);
+                
+                // Fondo de la barra
+                ctx.fillStyle = '#E5E7EB';
+                ctx.fillRect(startX, y, maxBarWidth, barHeight);
+                
+                // Barra de progreso
+                ctx.fillStyle = cat.color;
+                ctx.fillRect(startX, y, barWidth, barHeight);
+                
+                // Porcentaje dentro de la barra
+                if (porcentaje > 5) {
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`${porcentaje.toFixed(1)}%`, startX + barWidth/2, y + 28);
+                }
+                
+                // Valor
+                ctx.fillStyle = '#333333';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${formatearMiles(valor)}M`, startX + maxBarWidth + 15, y + 28);
+            });
+            
+            // Footer con nuevo texto
+            ctx.fillStyle = '#7010A6';
+            ctx.font = 'bold 22px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Para mí, mientras hayan 313.257 personas en pobreza,', 600, 540);
+            ctx.fillText('las piscinas NO son una prioridad ni hacen que a Medellín no le falte nada', 600, 570);
+            
+            ctx.fillStyle = '#FCD700';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 600);
+            
+            imageUrl = canvas.toDataURL('image/png');
+            document.getElementById('imagen-preview').src = imageUrl;
+            document.getElementById('compartir-container').classList.remove('hidden');
+            document.getElementById('compartir-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Descargar imagen
+        function descargarImagen() {
+            const link = document.createElement('a');
+            link.download = 'mi-presupuesto-medellin.png';
+            link.href = imageUrl;
+            link.click();
+        }
+
+        // Compartir en redes
+        function compartirEnRedes(red) {
+            const mensaje = encodeURIComponent('El Alcalde gastará 195 mil millones en piscinas mientras 313,257 personas viven en pobreza. Yo invertiría diferente. ¿Y tú? Haz tu propuesta ciudadana #MedellínDecide #NoMásCaprichos');
+            const url = encodeURIComponent(window.location.href);
+            
+            const urls = {
+                twitter: `https://twitter.com/intent/tweet?text=${mensaje}&url=${url}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                whatsapp: `https://wa.me/?text=${mensaje}%20${url}`
+            };
+            
+            window.open(urls[red], '_blank');
+            
+            // Registrar que compartió
+            compartidoEnRedes = true;
+            redCompartida = red;
+            enviarDatosAGoogleSheets();
+        }
+
+        // Función auxiliar para detectar navegador
+        function detectarNavegador() {
+            const agent = navigator.userAgent;
+            if (agent.indexOf('Chrome') > -1) return 'Chrome';
+            if (agent.indexOf('Safari') > -1) return 'Safari';
+            if (agent.indexOf('Firefox') > -1) return 'Firefox';
+            return 'Otro';
+        }
+
+        // Función para enviar datos a Google Sheets
+        async function enviarDatosAGoogleSheets() {
+            // Recopilar todos los datos
+            const datosParaEnviar = {
+                action: 'guardar_respuesta',
+                timestamp: new Date().toISOString(),
+                session_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                
+                // Distribución
+                distribucion: distribucion,
+                
+                // Comportamiento
+                imagen_generada: imageUrl ? 'SI' : 'NO',
+                imagen_compartida: compartidoEnRedes ? 'SI' : 'NO',
+                red_compartida: redCompartida || '',
+                formulario_completado: formularioCompletado ? 'SI' : 'NO',
+                
+                // Datos opcionales (si los dieron)
+                nombre: document.getElementById('nombre')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                whatsapp: document.getElementById('whatsapp')?.value || '',
+                autorizo_contacto: document.getElementById('autorizo')?.checked ? 'SI' : 'NO',
+                ideas: document.getElementById('ideas')?.value || '',
+                
+                // Datos técnicos
+                dispositivo: screen.width < 768 ? 'Móvil' : 'Desktop',
+                navegador: detectarNavegador(),
+                tiempo_sesion_segundos: Math.floor((Date.now() - tiempoInicio) / 1000)
+            };
+            
+            try {
+                console.log('Enviando datos al backend...');
+                
+                // Intentar primero con el proxy de Netlify
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosParaEnviar)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Datos enviados exitosamente:', data);
+                    
+                    // Mostrar número de participante si está disponible
+                    if (data.estadisticas && data.estadisticas.total_participantes) {
+                        console.log(`Eres el participante #${data.estadisticas.total_participantes}`);
+                    }
+                } else {
+                    console.error('Error del proxy:', response.status);
+                    // Guardar localmente como backup
+                    localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
+                    console.log('Datos guardados localmente como backup');
+                }
+                
+            } catch (error) {
+                console.error('Error enviando datos:', error);
+                // Guardar localmente como backup
+                localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
+                console.log('Datos guardados localmente como backup');
+            }
+        }
+
+        // Inicializar sliders
+        function inicializarSliders() {
+            const container = document.getElementById('sliders-container');
+            
+            categorias.forEach(cat => {
+                const sliderDiv = document.createElement('div');
+                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm';
+                sliderDiv.style.background = `rgba(${cat.color === '#7010A6' ? '112, 16, 166' : '252, 215, 0'}, 0.05)`;
+                sliderDiv.innerHTML = `
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">${cat.emoji}</span>
+                                <div>
+                                    <div class="font-bold text-gray-800">${cat.nombre}</div>
+                                    <div class="text-xs text-gray-500">Incrementos de $1,000M</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm mb-3">
+                            <span id="porcentaje-${cat.id}" class="text-gray-600 font-medium">0%</span>
+                            <span id="valor-${cat.id}" class="font-bold" style="color: ${cat.color};">$0M</span>
+                        </div>
+                        <input
+                            type="range"
+                            id="slider-${cat.id}"
+                            min="0"
+                            max="${PRESUPUESTO_TOTAL}"
+                            step="1000"
+                            value="0"
+                            onchange="handleSliderChange('${cat.id}', this.value)"
+                            oninput="handleSliderChange('${cat.id}', this.value)"
+                            class="slider w-full"
+                            style="background: linear-gradient(to right, ${cat.color} 0%, ${cat.color} 0%, #e5e7eb 0%, #e5e7eb 100%)"
+                        />
+                    </div>
+                `;
+                container.appendChild(sliderDiv);
+            });
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarSliders();
+            actualizarContador();
+            
+            // Contador de caracteres para el campo de ideas
+            const ideasTextarea = document.getElementById('ideas');
+            const contadorCaracteres = document.getElementById('contador-caracteres');
+            
+            if (ideasTextarea && contadorCaracteres) {
+                ideasTextarea.addEventListener('input', function() {
+                    contadorCaracteres.textContent = this.value.length;
+                });
+            }
+            
+            // Manejar envío del formulario
+            const formulario = document.getElementById('formulario-contacto');
+            if (formulario) {
+                formulario.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const btnEnviar = document.getElementById('btn-enviar');
+                    const mensajeEnviando = document.getElementById('mensaje-enviando');
+                    const mensajeExito = document.getElementById('mensaje-exito');
+                    const mensajeError = document.getElementById('mensaje-error');
+                    
+                    // Mostrar estado de envío
+                    btnEnviar.style.display = 'none';
+                    mensajeEnviando.classList.remove('hidden');
+                    mensajeExito.classList.add('hidden');
+                    mensajeError.classList.add('hidden');
+                    
+                    // Marcar formulario como completado
+                    formularioCompletado = true;
+                    
+                    try {
+                        // Enviar datos actualizados
+                        await enviarDatosAGoogleSheets();
+                        
+                        // Mostrar éxito
+                        mensajeEnviando.classList.add('hidden');
+                        mensajeExito.classList.remove('hidden');
+                        
+                        // Resetear formulario después de 3 segundos
+                        setTimeout(() => {
+                            formulario.reset();
+                            btnEnviar.style.display = 'inline-block';
+                            mensajeExito.classList.add('hidden');
+                            contadorCaracteres.textContent = '0';
+                        }, 3000);
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        mensajeEnviando.classList.add('hidden');
+                        mensajeError.classList.remove('hidden');
+                        btnEnviar.style.display = 'inline-block';
+                        
+                        setTimeout(() => {
+                            mensajeError.classList.add('hidden');
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+</body>
+</html> Configuración
         const PRESUPUESTO_TOTAL = 195000; // En millones
         // Usar proxy de Netlify (IMPORTANTE: no usar la URL directa de Google)
         const BACKEND_URL = '/.netlify/functions/googleProxy';
