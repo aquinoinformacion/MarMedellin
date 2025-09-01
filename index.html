@@ -58,18 +58,20 @@
     </style>
 
     <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WG7JLVDS');</script>
-  <!-- End Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WG7JLVDS');</script>
+    <!-- End Google Tag Manager -->
+    
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG7JLVDS"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG7JLVDS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  
     <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
         <div class="max-w-7xl mx-auto px-4 py-8">
             
@@ -364,12 +366,114 @@
     </div>
 
     <script>
-        // Actualizar gráfico de barras
+        // Configuración
+        const PRESUPUESTO_TOTAL = 195000;
+        const BACKEND_URL = '/.netlify/functions/googleProxy';
+        
+        let imageUrl = '';
+        let compartidoEnRedes = false;
+        let redCompartida = '';
+        let formularioCompletado = false;
+        const tiempoInicio = Date.now();
+        
+        const categorias = [
+            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#7010A6' },
+            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#FCD700' },
+            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#8B2CA3' },
+            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#E6C200' },
+            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#7010A6' },
+            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#FCD700' },
+            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#8B2CA3' },
+            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#E6C200' }
+        ];
+
+        let distribucion = {};
+        categorias.forEach(cat => {
+            distribucion[cat.id] = 0;
+        });
+
+        function formatearMiles(valor) {
+            return new Intl.NumberFormat('es-CO').format(valor);
+        }
+
+        function scrollToGrafico() {
+            document.getElementById('grafico-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function actualizarContador() {
+            const totalAsignado = Object.values(distribucion).reduce((sum, val) => sum + val, 0);
+            const restante = PRESUPUESTO_TOTAL - totalAsignado;
+            const porcentajeAsignado = (totalAsignado / PRESUPUESTO_TOTAL) * 100;
+            
+            const contador = document.getElementById('contador');
+            const estadoTexto = document.getElementById('estado-texto');
+            const barraProgreso = document.getElementById('barra-progreso');
+            const mensajeCompletado = document.getElementById('mensaje-completado');
+            const graficoContainer = document.getElementById('grafico-container');
+            const compartirContainer = document.getElementById('compartir-container');
+            const formularioContainer = document.getElementById('formulario-container');
+            
+            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
+            barraProgreso.style.width = `${porcentajeAsignado}%`;
+            
+            if (restante === 0) {
+                contador.className = 'text-4xl font-bold text-green-600 mb-2';
+                estadoTexto.textContent = '¡Distribución completa!';
+                estadoTexto.className = 'text-sm text-green-600 mb-4 font-bold';
+                mensajeCompletado.classList.remove('hidden');
+                graficoContainer.classList.remove('hidden');
+                formularioContainer.classList.remove('hidden');
+                compartirContainer.classList.add('hidden');
+                actualizarGrafico();
+                enviarDatosAGoogleSheets();
+            } else if (restante > 0) {
+                contador.className = 'text-4xl font-bold mb-2';
+                contador.style.color = '#7010A6';
+                estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
+                estadoTexto.className = 'text-sm text-gray-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
+                graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
+                formularioContainer.classList.add('hidden');
+            } else {
+                contador.className = 'text-4xl font-bold text-red-600 mb-2';
+                estadoTexto.textContent = `Te excediste por ${formatearMiles(Math.abs(restante))} millones`;
+                estadoTexto.className = 'text-sm text-red-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
+                graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
+                formularioContainer.classList.add('hidden');
+            }
+        }
+
+        function handleSliderChange(categoria, valor) {
+            const nuevoValor = parseInt(valor);
+            const otrosValores = Object.entries(distribucion)
+                .filter(([cat]) => cat !== categoria)
+                .reduce((sum, [, val]) => sum + val, 0);
+            
+            if (otrosValores + nuevoValor <= PRESUPUESTO_TOTAL) {
+                distribucion[categoria] = nuevoValor;
+                
+                document.getElementById(`valor-${categoria}`).textContent = `$${formatearMiles(nuevoValor)}M`;
+                document.getElementById(`porcentaje-${categoria}`).textContent = 
+                    `${((nuevoValor / PRESUPUESTO_TOTAL) * 100).toFixed(1)}%`;
+                
+                const slider = document.getElementById(`slider-${categoria}`);
+                const porcentaje = (nuevoValor / PRESUPUESTO_TOTAL) * 100;
+                const cat = categorias.find(c => c.id === categoria);
+                slider.style.background = `linear-gradient(to right, ${cat.color} 0%, ${cat.color} ${porcentaje}%, #e5e7eb ${porcentaje}%, #e5e7eb 100%)`;
+                
+                actualizarContador();
+            } else {
+                document.getElementById(`slider-${categoria}`).value = distribucion[categoria];
+            }
+        }
+
         function actualizarGrafico() {
             const container = document.getElementById('barras-container');
             container.innerHTML = '';
             
-            // Ordenar categorías por valor de mayor a menor
             const categoriasOrdenadas = [...categorias].sort((a, b) => 
                 distribucion[b.id] - distribucion[a.id]
             ).filter(cat => distribucion[cat.id] > 0);
@@ -401,7 +505,6 @@
             });
         }
 
-        // Generar imagen
         function generarImagen() {
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
@@ -409,32 +512,26 @@
             canvas.width = 1200;
             canvas.height = 630;
             
-            // Fondo blanco
             ctx.fillStyle = '#FFFFFF';
             ctx.fillRect(0, 0, 1200, 630);
             
-            // Header morado
             ctx.fillStyle = '#7010A6';
             ctx.fillRect(0, 0, 1200, 120);
             
-            // Título
             ctx.fillStyle = '#FFFFFF';
             ctx.font = 'bold 36px Arial';
             ctx.textAlign = 'center';
             ctx.fillText('Si yo fuera Alcalde invertiría 195 mil millones en:', 600, 70);
             
-            // Subtítulo
             ctx.fillStyle = '#FCD700';
             ctx.font = '20px Arial';
             ctx.fillText('Esta es mi propuesta de distribución presupuestal', 600, 100);
             
-            // Dibujar barras
             const startY = 150;
             const barHeight = 45;
             const maxBarWidth = 650;
             const startX = 280;
             
-            // Ordenar y filtrar categorías
             const categoriasOrdenadas = [...categorias]
                 .sort((a, b) => distribucion[b.id] - distribucion[a.id])
                 .filter(cat => distribucion[cat.id] > 0);
@@ -445,21 +542,17 @@
                 const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
                 const barWidth = (porcentaje / 100) * maxBarWidth;
                 
-                // Emoji y nombre
                 ctx.font = '20px Arial';
                 ctx.fillStyle = '#333333';
                 ctx.textAlign = 'right';
                 ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 15, y + 28);
                 
-                // Fondo de la barra
                 ctx.fillStyle = '#E5E7EB';
                 ctx.fillRect(startX, y, maxBarWidth, barHeight);
                 
-                // Barra de progreso
                 ctx.fillStyle = cat.color;
                 ctx.fillRect(startX, y, barWidth, barHeight);
                 
-                // Porcentaje dentro de la barra
                 if (porcentaje > 5) {
                     ctx.fillStyle = '#FFFFFF';
                     ctx.font = 'bold 16px Arial';
@@ -467,19 +560,17 @@
                     ctx.fillText(`${porcentaje.toFixed(1)}%`, startX + barWidth/2, y + 28);
                 }
                 
-                // Valor
                 ctx.fillStyle = '#333333';
                 ctx.font = 'bold 18px Arial';
                 ctx.textAlign = 'left';
                 ctx.fillText(`${formatearMiles(valor)}M`, startX + maxBarWidth + 15, y + 28);
             });
             
-            // Footer con nuevo texto
             ctx.fillStyle = '#7010A6';
             ctx.font = 'bold 22px Arial';
             ctx.textAlign = 'center';
             ctx.fillText('Para mí, mientras hayan 313.257 personas en pobreza,', 600, 540);
-            ctx.fillText('las piscinas NO son una prioridad ni hacen que a Medellín no le falte nada', 600, 570);
+            ctx.fillText('el "mar" NO es una prioridad ni hace que a Medellín no le falte nada', 600, 570);
             
             ctx.fillStyle = '#FCD700';
             ctx.font = 'bold 18px Arial';
@@ -491,7 +582,6 @@
             document.getElementById('compartir-container').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Descargar imagen
         function descargarImagen() {
             const link = document.createElement('a');
             link.download = 'mi-presupuesto-medellin.png';
@@ -499,9 +589,8 @@
             link.click();
         }
 
-        // Compartir en redes
         function compartirEnRedes(red) {
-            const mensaje = encodeURIComponent('El Alcalde gastará 195 mil millones en piscinas mientras 313,257 personas viven en pobreza. Yo invertiría diferente. ¿Y tú? Haz tu propuesta ciudadana #MedellínDecide #NoMásCaprichos');
+            const mensaje = encodeURIComponent('El Alcalde gastará 195 mil millones en "mar" mientras 313,257 personas viven en pobreza. Yo invertiría diferente. ¿Y tú? Haz tu propuesta ciudadana #MedellínDecide #NoMásCaprichos');
             const url = encodeURIComponent(window.location.href);
             
             const urls = {
@@ -512,13 +601,11 @@
             
             window.open(urls[red], '_blank');
             
-            // Registrar que compartió
             compartidoEnRedes = true;
             redCompartida = red;
             enviarDatosAGoogleSheets();
         }
 
-        // Función auxiliar para detectar navegador
         function detectarNavegador() {
             const agent = navigator.userAgent;
             if (agent.indexOf('Chrome') > -1) return 'Chrome';
@@ -527,31 +614,21 @@
             return 'Otro';
         }
 
-        // Función para enviar datos a Google Sheets
         async function enviarDatosAGoogleSheets() {
-            // Recopilar todos los datos
             const datosParaEnviar = {
                 action: 'guardar_respuesta',
                 timestamp: new Date().toISOString(),
                 session_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-                
-                // Distribución
                 distribucion: distribucion,
-                
-                // Comportamiento
                 imagen_generada: imageUrl ? 'SI' : 'NO',
                 imagen_compartida: compartidoEnRedes ? 'SI' : 'NO',
                 red_compartida: redCompartida || '',
                 formulario_completado: formularioCompletado ? 'SI' : 'NO',
-                
-                // Datos opcionales (si los dieron)
                 nombre: document.getElementById('nombre')?.value || '',
                 email: document.getElementById('email')?.value || '',
                 whatsapp: document.getElementById('whatsapp')?.value || '',
                 autorizo_contacto: document.getElementById('autorizo')?.checked ? 'SI' : 'NO',
                 ideas: document.getElementById('ideas')?.value || '',
-                
-                // Datos técnicos
                 dispositivo: screen.width < 768 ? 'Móvil' : 'Desktop',
                 navegador: detectarNavegador(),
                 tiempo_sesion_segundos: Math.floor((Date.now() - tiempoInicio) / 1000)
@@ -560,7 +637,6 @@
             try {
                 console.log('Enviando datos al backend...');
                 
-                // Intentar primero con el proxy de Netlify
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
                     headers: {
@@ -573,26 +649,22 @@
                     const data = await response.json();
                     console.log('Datos enviados exitosamente:', data);
                     
-                    // Mostrar número de participante si está disponible
                     if (data.estadisticas && data.estadisticas.total_participantes) {
                         console.log(`Eres el participante #${data.estadisticas.total_participantes}`);
                     }
                 } else {
                     console.error('Error del proxy:', response.status);
-                    // Guardar localmente como backup
                     localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
                     console.log('Datos guardados localmente como backup');
                 }
                 
             } catch (error) {
                 console.error('Error enviando datos:', error);
-                // Guardar localmente como backup
                 localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
                 console.log('Datos guardados localmente como backup');
             }
         }
 
-        // Inicializar sliders
         function inicializarSliders() {
             const container = document.getElementById('sliders-container');
             
@@ -633,12 +705,10 @@
             });
         }
 
-        // Inicializar al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             inicializarSliders();
             actualizarContador();
             
-            // Contador de caracteres para el campo de ideas
             const ideasTextarea = document.getElementById('ideas');
             const contadorCaracteres = document.getElementById('contador-caracteres');
             
@@ -648,7 +718,6 @@
                 });
             }
             
-            // Manejar envío del formulario
             const formulario = document.getElementById('formulario-contacto');
             if (formulario) {
                 formulario.addEventListener('submit', async function(e) {
@@ -659,24 +728,19 @@
                     const mensajeExito = document.getElementById('mensaje-exito');
                     const mensajeError = document.getElementById('mensaje-error');
                     
-                    // Mostrar estado de envío
                     btnEnviar.style.display = 'none';
                     mensajeEnviando.classList.remove('hidden');
                     mensajeExito.classList.add('hidden');
                     mensajeError.classList.add('hidden');
                     
-                    // Marcar formulario como completado
                     formularioCompletado = true;
                     
                     try {
-                        // Enviar datos actualizados
                         await enviarDatosAGoogleSheets();
                         
-                        // Mostrar éxito
                         mensajeEnviando.classList.add('hidden');
                         mensajeExito.classList.remove('hidden');
                         
-                        // Resetear formulario después de 3 segundos
                         setTimeout(() => {
                             formulario.reset();
                             btnEnviar.style.display = 'inline-block';
@@ -700,120 +764,3 @@
     </script>
 </body>
 </html>
-</body>
-</html> Configuración
-        const PRESUPUESTO_TOTAL = 195000; // En millones
-        // Usar proxy de Netlify (IMPORTANTE: no usar la URL directa de Google)
-        const BACKEND_URL = '/.netlify/functions/googleProxy';
-        
-        let imageUrl = '';
-        let compartidoEnRedes = false;
-        let redCompartida = '';
-        let formularioCompletado = false;
-        const tiempoInicio = Date.now();
-        
-        const categorias = [
-            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#7010A6' },
-            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#FCD700' },
-            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#8B2CA3' },
-            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#E6C200' },
-            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#7010A6' },
-            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#FCD700' },
-            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#8B2CA3' },
-            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#E6C200' }
-        ];
-
-        // Estado de distribución
-        let distribucion = {};
-        categorias.forEach(cat => {
-            distribucion[cat.id] = 0;
-        });
-
-        // Formatear números
-        function formatearMiles(valor) {
-            return new Intl.NumberFormat('es-CO').format(valor);
-        }
-
-        // Scroll suave al gráfico
-        function scrollToGrafico() {
-            document.getElementById('grafico-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Actualizar contador
-        function actualizarContador() {
-            const totalAsignado = Object.values(distribucion).reduce((sum, val) => sum + val, 0);
-            const restante = PRESUPUESTO_TOTAL - totalAsignado;
-            const porcentajeAsignado = (totalAsignado / PRESUPUESTO_TOTAL) * 100;
-            
-            const contador = document.getElementById('contador');
-            const estadoTexto = document.getElementById('estado-texto');
-            const barraProgreso = document.getElementById('barra-progreso');
-            const mensajeCompletado = document.getElementById('mensaje-completado');
-            const graficoContainer = document.getElementById('grafico-container');
-            const compartirContainer = document.getElementById('compartir-container');
-            const formularioContainer = document.getElementById('formulario-container');
-            
-            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
-            barraProgreso.style.width = `${porcentajeAsignado}%`;
-            
-            if (restante === 0) {
-                contador.className = 'text-4xl font-bold text-green-600 mb-2';
-                estadoTexto.textContent = '¡Distribución completa!';
-                estadoTexto.className = 'text-sm text-green-600 mb-4 font-bold';
-                mensajeCompletado.classList.remove('hidden');
-                graficoContainer.classList.remove('hidden');
-                formularioContainer.classList.remove('hidden');
-                // Ocultar compartir hasta que generen la imagen
-                compartirContainer.classList.add('hidden');
-                actualizarGrafico();
-                // Enviar datos automáticamente cuando completan la distribución
-                enviarDatosAGoogleSheets();
-            } else if (restante > 0) {
-                contador.className = 'text-4xl font-bold mb-2';
-                contador.style.color = '#7010A6';
-                estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
-                estadoTexto.className = 'text-sm text-gray-600 mb-4';
-                mensajeCompletado.classList.add('hidden');
-                graficoContainer.classList.add('hidden');
-                compartirContainer.classList.add('hidden');
-                formularioContainer.classList.add('hidden');
-            } else {
-                contador.className = 'text-4xl font-bold text-red-600 mb-2';
-                estadoTexto.textContent = `Te excediste por ${formatearMiles(Math.abs(restante))} millones`;
-                estadoTexto.className = 'text-sm text-red-600 mb-4';
-                mensajeCompletado.classList.add('hidden');
-                graficoContainer.classList.add('hidden');
-                compartirContainer.classList.add('hidden');
-                formularioContainer.classList.add('hidden');
-            }
-        }
-
-        // Manejar cambio de slider
-        function handleSliderChange(categoria, valor) {
-            const nuevoValor = parseInt(valor);
-            const otrosValores = Object.entries(distribucion)
-                .filter(([cat]) => cat !== categoria)
-                .reduce((sum, [, val]) => sum + val, 0);
-            
-            if (otrosValores + nuevoValor <= PRESUPUESTO_TOTAL) {
-                distribucion[categoria] = nuevoValor;
-                
-                // Actualizar valor mostrado
-                document.getElementById(`valor-${categoria}`).textContent = `$${formatearMiles(nuevoValor)}M`;
-                document.getElementById(`porcentaje-${categoria}`).textContent = 
-                    `${((nuevoValor / PRESUPUESTO_TOTAL) * 100).toFixed(1)}%`;
-                
-                // Actualizar color del slider
-                const slider = document.getElementById(`slider-${categoria}`);
-                const porcentaje = (nuevoValor / PRESUPUESTO_TOTAL) * 100;
-                const cat = categorias.find(c => c.id === categoria);
-                slider.style.background = `linear-gradient(to right, ${cat.color} 0%, ${cat.color} ${porcentaje}%, #e5e7eb ${porcentaje}%, #e5e7eb 100%)`;
-                
-                actualizarContador();
-            } else {
-                // Revertir el slider si excede el presupuesto
-                document.getElementById(`slider-${categoria}`).value = distribucion[categoria];
-            }
-        }
-
-        //
