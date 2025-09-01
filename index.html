@@ -603,7 +603,7 @@
             
             compartidoEnRedes = true;
             redCompartida = red;
-            enviarDatosAGoogleSheets();
+            // No enviar datos aquí - ya se enviaron al completar distribución
         }
 
         function detectarNavegador() {
@@ -614,7 +614,16 @@
             return 'Otro';
         }
 
+        let datosEnviados = false; // Variable global para controlar envío único
+
+        // Función para enviar datos a Google Sheets (una sola vez por sesión)
         async function enviarDatosAGoogleSheets() {
+            // Prevenir múltiples envíos
+            if (datosEnviados) {
+                console.log('Datos ya enviados previamente');
+                return;
+            }
+
             const datosParaEnviar = {
                 action: 'guardar_respuesta',
                 timestamp: new Date().toISOString(),
@@ -636,6 +645,7 @@
             
             try {
                 console.log('Enviando datos al backend...');
+                datosEnviados = true; // Marcar como enviado ANTES de la llamada
                 
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
@@ -654,12 +664,14 @@
                     }
                 } else {
                     console.error('Error del proxy:', response.status);
+                    datosEnviados = false; // Permitir reintento en caso de error
                     localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
                     console.log('Datos guardados localmente como backup');
                 }
                 
             } catch (error) {
                 console.error('Error enviando datos:', error);
+                datosEnviados = false; // Permitir reintento en caso de error
                 localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
                 console.log('Datos guardados localmente como backup');
             }
