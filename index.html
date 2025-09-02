@@ -1,778 +1,837 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Una decisión de 195 mil millones para cumplir ¿un capricho?</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .slider {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 12px;
-            border-radius: 6px;
-            background: #e5e7eb;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #7010A6;
-            cursor: pointer;
-            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
-            transition: all 0.2s ease;
-        }
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(112, 16, 166, 0.4);
-        }
-        .slider::-moz-range-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #7010A6;
-            cursor: pointer;
-            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
-            border: none;
-        }
-        .slider:hover {
-            opacity: 0.9;
-        }
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #7010A6;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una decisión de 195 mil millones para cumplir ¿un capricho?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 12px;
+            border-radius: 6px;
+            background: #e5e7eb;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #7010A6;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
+            transition: all 0.2s ease;
+        }
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(112, 16, 166, 0.4);
+        }
+        .slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #7010A6;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(112, 16, 166, 0.3);
+            border: none;
+        }
+        .slider:hover {
+            opacity: 0.9;
+        }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #7010A6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WG7JLVDS');</script>
-    <!-- End Google Tag Manager -->
-    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WG7JLVDS');</script>
+        
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG7JLVDS"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-  
-    <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            
-            <!-- ======== HEADER SECTION ======== -->
-            <header class="text-center mb-12">
-                <!-- Imagen del header -->
-                <div class="max-w-4xl mx-auto mb-8">
-                    <img src="HeaderMaryplaya.png" alt="Header Mar y Playa Medellín" 
-                         class="w-full rounded-xl shadow-lg">
-                </div>
-                
-                <h1 class="text-2xl md:text-4xl font-bold mb-8" style="color: #7010A6;">
-                    ¿195 mil millones en "mar" mientras Medellín se ahoga en problemas reales?
-                </h1>
-                
-                <!-- Contenedor principal con mismo ancho que la imagen -->
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <!-- Estadísticas de pobreza -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
-                        <h3 class="text-xl font-bold mb-4" style="color: #7010A6;">Mientras el Alcalde sueña con playas artificiales, Medellín enfrenta:</h3>
-                        <div class="grid md:grid-cols-3 gap-4 text-sm">
-                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                                <div class="text-2xl font-bold" style="color: #7010A6;">313,257</div>
-                                <div class="text-gray-600">personas en pobreza multidimensional</div>
-                            </div>
-                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                                <div class="text-2xl font-bold" style="color: #7010A6;">221,000</div>
-                                <div class="text-gray-600">personas con inseguridad alimentaria severa</div>
-                            </div>
-                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                                <div class="text-2xl font-bold" style="color: #7010A6;">128,000</div>
-                                <div class="text-gray-600">personas viviendo en hacinamiento</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Mensaje central -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(252, 215, 0, 0.05);">
-                        <p class="text-lg font-semibold mb-2" style="color: #7010A6;">
-                            ¿Es el mar una prioridad en Medellín cuando hay otras necesidades sin resolver?
-                        </p>
-                        <p class="text-gray-600">
-                            Esta respuesta parece más un capricho personal que una solución a lo que Medellín realmente necesita.
-                        </p>
-                    </div>
-                    
-                    <!-- Alternativas de inversión -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
-                        <h3 class="text-xl font-bold mb-6" style="color: #7010A6;">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos:</h3>
-                        
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
-                                <div class="text-4xl mb-3">🏠</div>
-                                <div class="text-2xl font-bold text-gray-800 mb-2">650 casas</div>
-                                <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
-                                <div class="text-base font-semibold" style="color: #7010A6;">1 de cada 10 familias de Belén</div>
-                            </div>
-                            
-                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
-                                <div class="text-4xl mb-3">🏫</div>
-                                <div class="text-2xl font-bold text-gray-800 mb-2">5 mega colegios</div>
-                                <div class="text-sm text-gray-600 mb-2">para atender más de 8000 estudiantes</div>
-                                <div class="text-base font-semibold" style="color: #7010A6;">y asegurar la cobertura con criterios de calidad</div>
-                            </div>
-                            
-                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
-                                <div class="text-4xl mb-3">🛠️</div>
-                                <div class="text-2xl font-bold text-gray-800 mb-2">6,845 metros</div>
-                                <div class="text-sm text-gray-600 mb-2">obras de estabilización</div>
-                                <div class="text-base font-semibold" style="color: #7010A6;">para prevenir accidentes mortales</div>
-                            </div>
-                            
-                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
-                                <div class="text-4xl mb-3">🎓</div>
-                                <div class="text-2xl font-bold text-gray-800 mb-2">32,500 semestres</div>
-                                <div class="text-sm text-gray-600 mb-2">universitarios</div>
-                                <div class="text-base font-semibold" style="color: #7010A6;">todos los jóvenes de Popular y Santa Cruz</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Call to action -->
-                    <div class="rounded-xl p-6 text-white shadow-lg" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
-                        <p class="text-lg font-semibold text-center mb-2">
-                            El "mar" es el capricho de uno. Las necesidades son de todos.
-                        </p>
-                        <p class="text-xl font-bold text-center" style="color: #FCD700;">
-                            Si tú fueras alcalde que priorizarías para Medellín, ¿caprichos o necesidades?
-                        </p>
-                    </div>
-                </div>
-            </header>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WG7JLVDS"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      
+    <div class="min-h-screen bg-gradient-to-br from-purple-50 to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            
+                        <header class="text-center mb-12">
+                                <div class="max-w-4xl mx-auto mb-8">
+                    <img src="HeaderMaryplaya.png" alt="Header Mar y Playa Medellín" 
+                         class="w-full rounded-xl shadow-lg">
+                </div>
+                
+                <h1 class="text-2xl md:text-4xl font-bold mb-8" style="color: #7010A6;">
+                    ¿195 mil millones en "mar" mientras Medellín se ahoga en problemas reales?
+                </h1>
+                
+                                <div class="max-w-4xl mx-auto space-y-6">
+                                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                        <h3 class="text-xl font-bold mb-4" style="color: #7010A6;">Mientras el Alcalde sueña con playas artificiales, Medellín enfrenta:</h3>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <div class="text-2xl font-bold" style="color: #7010A6;">313,257</div>
+                                <div class="text-gray-600">personas en pobreza multidimensional</div>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <div class="text-2xl font-bold" style="color: #7010A6;">221,000</div>
+                                <div class="text-gray-600">personas con inseguridad alimentaria severa</div>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <div class="text-2xl font-bold" style="color: #7010A6;">128,000</div>
+                                <div class="text-gray-600">personas viviendo en hacinamiento</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(252, 215, 0, 0.05);">
+                        <p class="text-lg font-semibold mb-2" style="color: #7010A6;">
+                            ¿Es el mar una prioridad en Medellín cuando hay otras necesidades sin resolver?
+                        </p>
+                        <p class="text-gray-600">
+                            Esta respuesta parece más un capricho personal que una solución a lo que Medellín realmente necesita.
+                        </p>
+                    </div>
+                    
+                                        <div class="bg-white rounded-xl p-6 shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                        <h3 class="text-xl font-bold mb-6" style="color: #7010A6;">Con esos 195 mil millones, en lugar de Mar y Playa, podríamos:</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
+                                <div class="text-4xl mb-3">🏠</div>
+                                <div class="text-2xl font-bold text-gray-800 mb-2">650 casas</div>
+                                <div class="text-sm text-gray-600 mb-2">de 300 millones cada una</div>
+                                <div class="text-base font-semibold" style="color: #7010A6;">1 de cada 10 familias de Belén</div>
+                            </div>
+                            
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
+                                <div class="text-4xl mb-3">🏫</div>
+                                <div class="text-2xl font-bold text-gray-800 mb-2">5 mega colegios</div>
+                                <div class="text-sm text-gray-600 mb-2">para atender más de 8000 estudiantes</div>
+                                <div class="text-base font-semibold" style="color: #7010A6;">y asegurar la cobertura con criterios de calidad</div>
+                            </div>
+                            
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
+                                <div class="text-4xl mb-3">🛠️</div>
+                                <div class="text-2xl font-bold text-gray-800 mb-2">6,845 metros</div>
+                                <div class="text-sm text-gray-600 mb-2">obras de estabilización</div>
+                                <div class="text-base font-semibold" style="color: #7010A6;">para prevenir accidentes mortales</div>
+                            </div>
+                            
+                            <div class="text-center p-6 bg-white rounded-lg shadow-sm" style="background: rgba(112, 16, 166, 0.08);">
+                                <div class="text-4xl mb-3">🎓</div>
+                                <div class="text-2xl font-bold text-gray-800 mb-2">32,500 semestres</div>
+                                <div class="text-sm text-gray-600 mb-2">universitarios</div>
+                                <div class="text-base font-semibold" style="color: #7010A6;">todos los jóvenes de Popular y Santa Cruz</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                                        <div class="rounded-xl p-6 text-white shadow-lg" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                        <p class="text-lg font-semibold text-center mb-2">
+                            El "mar" es el capricho de uno. Las necesidades son de todos.
+                        </p>
+                        <p class="text-xl font-bold text-center" style="color: #FCD700;">
+                            Si tú fueras alcalde que priorizarías para Medellín, ¿caprichos o necesidades?
+                        </p>
+                    </div>
+                </div>
+            </header>
 
-            <!-- ======== DISTRIBUCIÓN SECTION ======== -->
-            <div class="max-w-4xl mx-auto mb-12">
-                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
-                    <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
-                        <h2 class="text-2xl font-bold text-white mb-2">Es hora de que Medellín realmente decida</h2>
-                        <p class="text-gray-100">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
-                        <p class="text-sm font-semibold mt-2" style="color: #FCD700;">💡 Tip: Las barras se mueven en incrementos de $1,000 millones</p>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="grid lg:grid-cols-3 gap-8">
-                            <!-- Sliders (2 columnas en desktop) -->
-                            <div class="lg:col-span-2">
-                                <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
-                                    <!-- Se llenarán con JavaScript -->
-                                </div>
-                            </div>
-                            
-                            <!-- Contador lateral -->
-                            <div class="lg:col-span-1">
-                                <div class="sticky top-4 bg-white rounded-xl p-6 text-center shadow-md" style="background: rgba(252, 215, 0, 0.05);">
-                                    <h3 class="text-lg font-bold mb-4" style="color: #7010A6;">Presupuesto por distribuir</h3>
-                                    <div id="contador" class="text-4xl font-bold mb-2" style="color: #7010A6;">
-                                        $195,000
-                                    </div>
-                                    <div class="text-lg text-gray-700 mb-4">
-                                        millones de pesos
-                                    </div>
-                                    <div id="estado-texto" class="text-sm text-gray-600 mb-4">
-                                        Distribuye el presupuesto completo
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
-                                        <div id="barra-progreso" class="h-4 rounded-full transition-all duration-300" 
-                                             style="width: 0%; background: linear-gradient(to right, #7010A6, #FCD700);"></div>
-                                    </div>
-                                    <div id="mensaje-completado" class="hidden">
-                                        <div class="text-green-600 font-bold text-lg mb-3">
-                                            ✓ ¡Presupuesto redistribuido!
-                                        </div>
-                                        <button onclick="scrollToGrafico()" class="text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg" 
-                                                style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
-                                            Ver mi propuesta ciudadana ↓
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="max-w-4xl mx-auto mb-12">
+                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                    <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
+                        <h2 class="text-2xl font-bold text-white mb-2">Es hora de que Medellín realmente decida</h2>
+                        <p class="text-gray-100">Mueve las barras para mostrar cuáles son las prioridades de Medellín</p>
+                        <p class="text-sm font-semibold mt-2" style="color: #FCD700;">💡 Tip: Las barras se mueven en incrementos de $1,000 millones</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="grid lg:grid-cols-3 gap-8">
+                                                        <div class="lg:col-span-2">
+                                <div class="grid md:grid-cols-2 gap-4" id="sliders-container">
+                                                                    </div>
+                            </div>
+                            
+                                                        <div class="lg:col-span-1">
+                                <div class="sticky top-4 bg-white rounded-xl p-6 text-center shadow-md" style="background: rgba(252, 215, 0, 0.05);">
+                                    <h3 class="text-lg font-bold mb-4" style="color: #7010A6;">Presupuesto por distribuir</h3>
+                                    <div id="contador" class="text-4xl font-bold mb-2" style="color: #7010A6;">
+                                        $195,000
+                                    </div>
+                                    <div class="text-lg text-gray-700 mb-4">
+                                        millones de pesos
+                                    </div>
+                                    <div id="estado-texto" class="text-sm text-gray-600 mb-4">
+                                        Distribuye el presupuesto completo
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                        <div id="barra-progreso" class="h-4 rounded-full transition-all duration-300" 
+                                             style="width: 0%; background: linear-gradient(to right, #7010A6, #FCD700);"></div>
+                                    </div>
+                                    <div id="mensaje-completado" class="hidden">
+                                        <div class="text-green-600 font-bold text-lg mb-3">
+                                            ✓ ¡Presupuesto redistribuido!
+                                        </div>
+                                        <button onclick="scrollToGrafico()" class="text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg" 
+                                                style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                            Ver mi propuesta ciudadana ↓
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- ======== PROPUESTA CIUDADANA SECTION (oculto inicialmente) ======== -->
-            <div id="grafico-container" class="max-w-4xl mx-auto mb-12 hidden">
-                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
-                    <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
-                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Si yo fuera Alcalde, NO gastaría en caprichos</h3>
-                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Invertiría 195 mil millones en:</h3>
-                        <p class="text-gray-700 text-center">Mi propuesta responde a las necesidades que vivo</p>
-                    </div>
-                    <div class="p-6">
-                        <div id="barras-container" class="space-y-4 mb-8">
-                            <!-- Se llenarán con JavaScript -->
-                        </div>
-                        
-                        <div class="text-center">
-                            <button onclick="generarImagen()" class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg" 
-                                    style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
-                                📸 Generar imagen para compartir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div id="grafico-container" class="max-w-4xl mx-auto mb-12 hidden">
+                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
+                    <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Si yo fuera Alcalde, NO gastaría en caprichos</h3>
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Invertiría 195 mil millones en:</h3>
+                        <p class="text-gray-700 text-center">Mi propuesta responde a las necesidades que vivo</p>
+                    </div>
+                    <div class="p-6">
+                        <div id="barras-container" class="space-y-4 mb-8">
+                                                    </div>
+                        
+                        <div class="text-center">
+                            <button onclick="generarImagen()" class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg" 
+                                    style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                📸 Generar imagen para compartir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Canvas oculto -->
-            <canvas id="canvas" style="display: none;"></canvas>
+                        <canvas id="canvas" style="display: none;"></canvas>
 
-            <!-- ======== COMPARTIR SECTION (oculto inicialmente) ======== -->
-            <div id="compartir-container" class="max-w-4xl mx-auto mb-12 hidden">
-                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
-                    <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
-                        <h3 class="text-2xl font-bold text-white text-center">Comparte tu propuesta</h3>
-                    </div>
-                    <div class="p-6">
-                        <div class="mb-6">
-                            <img id="imagen-preview" alt="Mi propuesta" class="w-full rounded-lg shadow-lg" />
-                        </div>
-                        <div class="flex flex-wrap gap-4 justify-center">
-                            <button onclick="descargarImagen()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
-                                ⬇️ Descargar
-                            </button>
-                            <button onclick="compartirEnRedes('twitter')" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
-                                🐦 X 
-                            </button>
-                            <button onclick="compartirEnRedes('facebook')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
-                                📘 Facebook
-                            </button>
-                            <button onclick="compartirEnRedes('whatsapp')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
-                                💬 WhatsApp
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div id="compartir-container" class="max-w-4xl mx-auto mb-12 hidden">
+                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(112, 16, 166, 0.02);">
+                    <div class="p-6 rounded-xl" style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%); border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-white text-center">Comparte tu propuesta</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <img id="imagen-preview" alt="Mi propuesta" class="w-full rounded-lg shadow-lg" />
+                        </div>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <button onclick="descargarImagen()" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                ⬇️ Descargar
+                            </button>
+                            <button onclick="compartirEnRedes('twitter')" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                🐦 X 
+                            </button>
+                            <button onclick="compartirEnRedes('facebook')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                📘 Facebook
+                            </button>
+                            <button onclick="compartirEnRedes('whatsapp')" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md hover:shadow-lg">
+                                💬 WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- ======== FORMULARIO SECTION (oculto inicialmente) ======== -->
-            <div id="formulario-container" class="max-w-4xl mx-auto mb-12 hidden">
-                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
-                    <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
-                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Tu voz importa</h3>
-                        <p class="text-gray-700 text-center">Únete a la Medellín que tiene clara sus prioridades</p>
-                    </div>
-                    
-                    <form id="formulario-contacto" class="p-6">
-                        <!-- Datos personales opcionales -->
-                        <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(112, 16, 166, 0.05);">
-                            <h4 class="font-bold mb-4" style="color: #7010A6;">Datos de contacto (opcional)</h4>
-                            <p class="text-sm text-gray-600 mb-4">Si deseas recibir actualizaciones sobre esta iniciativa de control político</p>
-                            
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" 
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
-                                           style="focus:ring-color: #7010A6;"
-                                           placeholder="Tu nombre (opcional)">
-                                </div>
-                                
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-                                    <input type="email" id="email" name="email" 
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
-                                           style="focus:ring-color: #7010A6;"
-                                           placeholder="tu@email.com (opcional)">
-                                </div>
-                                
-                                <div>
-                                    <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
-                                    <input type="tel" id="whatsapp" name="whatsapp" 
-                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
-                                           style="focus:ring-color: #7010A6;"
-                                           placeholder="300 123 4567 (opcional)">
-                                </div>
-                                
-                                <div class="flex items-center">
-                                    <input type="checkbox" id="autorizo" name="autorizo" class="mr-2" style="accent-color: #7010A6;">
-                                    <label for="autorizo" class="text-sm text-gray-700">
-                                        Autorizo el uso de mis datos para esta iniciativa
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Campo de ideas -->
-                        <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
-                            <h4 class="font-bold mb-4" style="color: #7010A6;">Comparte tus ideas</h4>
-                            <p class="text-sm text-gray-600 mb-4">¿Qué otras propuestas tienes para mejorar Medellín? (máximo 200 palabras)</p>
-                            
-                            <textarea id="ideas" name="ideas" rows="5" maxlength="1000"
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
-                                      style="focus:ring-color: #FCD700;"
-                                      placeholder="Cuéntanos tus ideas para un mejor uso de los recursos públicos..."></textarea>
-                            <div class="text-right text-sm text-gray-500 mt-1">
-                                <span id="contador-caracteres">0</span>/1000 caracteres
-                            </div>
-                        </div>
-                        
-                        <!-- Botón de envío -->
-                        <div class="text-center">
-                            <button type="submit" id="btn-enviar" 
-                                    class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg"
-                                    style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
-                                Enviar mi propuesta ciudadana
-                            </button>
-                            <div id="mensaje-enviando" class="hidden mt-4">
-                                <div class="loading-spinner mx-auto"></div>
-                                <p class="text-sm text-gray-600 mt-2">Enviando...</p>
-                            </div>
-                            <div id="mensaje-exito" class="hidden mt-4 p-4 bg-green-50 border border-green-400 text-green-700 rounded-lg">
-                                ✓ ¡Gracias por participar! Tu voz ha sido registrada.
-                            </div>
-                            <div id="mensaje-error" class="hidden mt-4 p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
-                                ✗ Hubo un error. Por favor intenta de nuevo.
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                        <div id="formulario-container" class="max-w-4xl mx-auto mb-12 hidden">
+                <div class="bg-white rounded-xl shadow-lg" style="background: rgba(252, 215, 0, 0.02);">
+                    <div class="p-6 rounded-xl" style="background: rgba(252, 215, 0, 0.9); border-radius: 0.75rem 0.75rem 0 0;">
+                        <h3 class="text-2xl font-bold text-center mb-2" style="color: #7010A6;">Tu voz importa</h3>
+                        <p class="text-gray-700 text-center">Únete a la Medellín que tiene clara sus prioridades</p>
+                    </div>
+                    
+                    <form id="formulario-contacto" class="p-6">
+                                                <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(112, 16, 166, 0.05);">
+                            <h4 class="font-bold mb-4" style="color: #7010A6;">Datos de contacto (opcional)</h4>
+                            <p class="text-sm text-gray-600 mb-4">Si deseas recibir actualizaciones sobre esta iniciativa de control político</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="Tu nombre (opcional)">
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                                    <input type="email" id="email" name="email" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="tu@email.com (opcional)">
+                                </div>
+                                
+                                <div>
+                                    <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                                    <input type="tel" id="whatsapp" name="whatsapp" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                           style="focus:ring-color: #7010A6;"
+                                           placeholder="300 123 4567 (opcional)">
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="autorizo" name="autorizo" class="mr-2" style="accent-color: #7010A6;">
+                                    <label for="autorizo" class="text-sm text-gray-700">
+                                        Autorizo el uso de mis datos para esta iniciativa
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                                                <div class="rounded-xl p-6 mb-6 bg-white shadow-sm" style="background: rgba(252, 215, 0, 0.08);">
+                            <h4 class="font-bold mb-4" style="color: #7010A6;">Comparte tus ideas</h4>
+                            <p class="text-sm text-gray-600 mb-4">¿Qué otras propuestas tienes para mejorar Medellín? (máximo 200 palabras)</p>
+                            
+                            <textarea id="ideas" name="ideas" rows="5" maxlength="1000"
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent"
+                                      style="focus:ring-color: #FCD700;"
+                                      placeholder="Cuéntanos tus ideas para un mejor uso de los recursos públicos..."></textarea>
+                            <div class="text-right text-sm text-gray-500 mt-1">
+                                <span id="contador-caracteres">0</span>/1000 caracteres
+                            </div>
+                        </div>
+                        
+                                                <div class="text-center">
+                            <button type="submit" id="btn-enviar" 
+                                    class="text-white font-bold py-3 px-8 rounded-lg transition-all shadow-md hover:shadow-lg"
+                                    style="background: linear-gradient(135deg, #7010A6 0%, #8B2CA3 100%);">
+                                Enviar mi propuesta ciudadana
+                            </button>
+                            <div id="mensaje-enviando" class="hidden mt-4">
+                                <div class="loading-spinner mx-auto"></div>
+                                <p class="text-sm text-gray-600 mt-2">Enviando...</p>
+                            </div>
+                            <div id="mensaje-exito" class="hidden mt-4 p-4 bg-green-50 border border-green-400 text-green-700 rounded-lg">
+                                ✓ ¡Gracias por participar! Tu voz ha sido registrada.
+                            </div>
+                            <div id="mensaje-error" class="hidden mt-4 p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
+                                ✗ Hubo un error. Por favor intenta de nuevo.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-            <!-- ======== FOOTER ======== -->
-            <footer class="text-center py-8 text-gray-600 max-w-4xl mx-auto">
-                <div class="border-t pt-6" style="border-color: rgba(112, 16, 166, 0.2);">
-                    <p class="mb-2 font-semibold" style="color: #7010A6;">Medellín reflexiona sobre sus necesidades</p>
-                    <p class="text-sm">¿Qué es lo único que le hace falta a Medellín?<br>
-                    Por más derechos y menos caprichos; control político ciudadano.</p>
-                </div>
-            </footer>
-        </div>
-    </div>
+                        <footer class="text-center py-8 text-gray-600 max-w-4xl mx-auto">
+                <div class="border-t pt-6" style="border-color: rgba(112, 16, 166, 0.2);">
+                    <p class="mb-2 font-semibold" style="color: #7010A6;">Medellín reflexiona sobre sus necesidades</p>
+                    <p class="text-sm">¿Qué es lo único que le hace falta a Medellín?<br>
+                    Por más derechos y menos caprichos; control político ciudadano.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
 
-    <script>
-        // Configuración
-        const PRESUPUESTO_TOTAL = 195000;
-        const BACKEND_URL = '/.netlify/functions/googleProxy';
-        
-        let imageUrl = '';
-        let compartidoEnRedes = false;
-        let redCompartida = '';
-        let formularioCompletado = false;
-        const tiempoInicio = Date.now();
-        
-        const categorias = [
-            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#7010A6' },
-            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#FCD700' },
-            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#8B2CA3' },
-            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#E6C200' },
-            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#7010A6' },
-            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#FCD700' },
-            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#8B2CA3' },
-            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#E6C200' }
-        ];
+    <script>
+        // Modificaciones necesarias en el JavaScript del frontend
 
-        let distribucion = {};
-        categorias.forEach(cat => {
-            distribucion[cat.id] = 0;
-        });
+        // 1. CAMBIAR la lógica de envío de datos
+        let datosBasicosEnviados = false; // Solo para la distribución inicial
+        let sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9); // ID único de sesión
+        
+        // 2. FUNCIÓN PARA ENVÍO INICIAL (solo distribución)
+        async function enviarDistribucionInicial() {
+            if (datosBasicosEnviados) {
+                console.log('Distribución ya enviada');
+                return;
+            }
+        
+            const datosDistribucion = {
+                action: 'guardar_respuesta',
+                timestamp: new Date().toISOString(),
+                session_id: sessionId,
+                distribucion: distribucion,
+                imagen_generada: 'NO',
+                imagen_compartida: 'NO',
+                red_compartida: '',
+                formulario_completado: 'NO',
+                nombre: '',
+                email: '',
+                whatsapp: '',
+                autorizo_contacto: 'NO',
+                ideas: '',
+                dispositivo: screen.width < 768 ? 'Móvil' : 'Desktop',
+                navegador: detectarNavegador(),
+                tiempo_sesion_segundos: Math.floor((Date.now() - tiempoInicio) / 1000)
+            };
+            
+            try {
+                console.log('Enviando distribución inicial...');
+                datosBasicosEnviados = true;
+                
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosDistribucion)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Distribución enviada:', data);
+                } else {
+                    console.error('Error enviando distribución:', response.status);
+                    datosBasicosEnviados = false;
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                datosBasicosEnviados = false;
+            }
+        }
+        
+        // 3. FUNCIÓN PARA ACTUALIZAR CUANDO SE GENERA IMAGEN
+        async function actualizarConImagen() {
+            const datosImagen = {
+                action: 'actualizar_respuesta', // Nueva acción
+                session_id: sessionId,
+                imagen_generada: 'SI',
+                timestamp_imagen: new Date().toISOString()
+            };
+            
+            try {
+                await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosImagen)
+                });
+                console.log('Imagen actualizada');
+            } catch (error) {
+                console.error('Error actualizando imagen:', error);
+            }
+        }
+        
+        // 4. FUNCIÓN PARA ACTUALIZAR CUANDO SE COMPARTE
+        async function actualizarConCompartir(red) {
+            const datosCompartir = {
+                action: 'actualizar_respuesta',
+                session_id: sessionId,
+                imagen_compartida: 'SI',
+                red_compartida: red,
+                timestamp_compartir: new Date().toISOString()
+            };
+            
+            try {
+                await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosCompartir)
+                });
+                console.log('Compartir actualizado');
+            } catch (error) {
+                console.error('Error actualizando compartir:', error);
+            }
+        }
+        
+        // 5. FUNCIÓN PARA DATOS COMPLETOS DEL FORMULARIO
+        async function enviarFormularioCompleto() {
+            const datosCompletos = {
+                action: 'actualizar_respuesta',
+                session_id: sessionId,
+                formulario_completado: 'SI',
+                nombre: document.getElementById('nombre')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                whatsapp: document.getElementById('whatsapp')?.value || '',
+                autorizo_contacto: document.getElementById('autorizo')?.checked ? 'SI' : 'NO',
+                ideas: document.getElementById('ideas')?.value || '',
+                timestamp_formulario: new Date().toISOString(),
+                tiempo_sesion_final: Math.floor((Date.now() - tiempoInicio) / 1000)
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosCompletos)
+                });
+                
+                if (response.ok) {
+                    console.log('Formulario enviado exitosamente');
+                    return true;
+                } else {
+                    console.error('Error enviando formulario');
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                return false;
+            }
+        }
 
-        function formatearMiles(valor) {
-            return new Intl.NumberFormat('es-CO').format(valor);
-        }
+        // Configuración
+        const PRESUPUESTO_TOTAL = 195000;
+        const BACKEND_URL = '/.netlify/functions/googleProxy';
+        
+        let imageUrl = '';
+        const tiempoInicio = Date.now();
+        
+        const categorias = [
+            { id: 'salud', nombre: 'Salud', emoji: '🏥', color: '#7010A6' },
+            { id: 'educacion', nombre: 'Educación', emoji: '📚', color: '#FCD700' },
+            { id: 'seguridad', nombre: 'Seguridad', emoji: '👮', color: '#8B2CA3' },
+            { id: 'vivienda', nombre: 'Vivienda', emoji: '🏠', color: '#E6C200' },
+            { id: 'movilidad', nombre: 'Movilidad', emoji: '🚌', color: '#7010A6' },
+            { id: 'servicios', nombre: 'Servicios Públicos', emoji: '🚰', color: '#FCD700' },
+            { id: 'deporte', nombre: 'Deporte y Recreación', emoji: '⚽', color: '#8B2CA3' },
+            { id: 'cultura', nombre: 'Cultura', emoji: '🎭', color: '#E6C200' }
+        ];
 
-        function scrollToGrafico() {
-            document.getElementById('grafico-container').scrollIntoView({ behavior: 'smooth' });
-        }
+        let distribucion = {};
+        categorias.forEach(cat => {
+            distribucion[cat.id] = 0;
+        });
 
-        function actualizarContador() {
-            const totalAsignado = Object.values(distribucion).reduce((sum, val) => sum + val, 0);
-            const restante = PRESUPUESTO_TOTAL - totalAsignado;
-            const porcentajeAsignado = (totalAsignado / PRESUPUESTO_TOTAL) * 100;
-            
-            const contador = document.getElementById('contador');
-            const estadoTexto = document.getElementById('estado-texto');
-            const barraProgreso = document.getElementById('barra-progreso');
-            const mensajeCompletado = document.getElementById('mensaje-completado');
-            const graficoContainer = document.getElementById('grafico-container');
-            const compartirContainer = document.getElementById('compartir-container');
-            const formularioContainer = document.getElementById('formulario-container');
-            
-            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
-            barraProgreso.style.width = `${porcentajeAsignado}%`;
-            
-            if (restante === 0) {
-                contador.className = 'text-4xl font-bold text-green-600 mb-2';
-                estadoTexto.textContent = '¡Distribución completa!';
-                estadoTexto.className = 'text-sm text-green-600 mb-4 font-bold';
-                mensajeCompletado.classList.remove('hidden');
-                graficoContainer.classList.remove('hidden');
-                formularioContainer.classList.remove('hidden');
-                compartirContainer.classList.add('hidden');
-                actualizarGrafico();
-                enviarDatosAGoogleSheets();
-            } else if (restante > 0) {
-                contador.className = 'text-4xl font-bold mb-2';
-                contador.style.color = '#7010A6';
-                estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
-                estadoTexto.className = 'text-sm text-gray-600 mb-4';
-                mensajeCompletado.classList.add('hidden');
-                graficoContainer.classList.add('hidden');
-                compartirContainer.classList.add('hidden');
-                formularioContainer.classList.add('hidden');
-            } else {
-                contador.className = 'text-4xl font-bold text-red-600 mb-2';
-                estadoTexto.textContent = `Te excediste por ${formatearMiles(Math.abs(restante))} millones`;
-                estadoTexto.className = 'text-sm text-red-600 mb-4';
-                mensajeCompletado.classList.add('hidden');
-                graficoContainer.classList.add('hidden');
-                compartirContainer.classList.add('hidden');
-                formularioContainer.classList.add('hidden');
-            }
-        }
+        function formatearMiles(valor) {
+            return new Intl.NumberFormat('es-CO').format(valor);
+        }
 
-        function handleSliderChange(categoria, valor) {
-            const nuevoValor = parseInt(valor);
-            const otrosValores = Object.entries(distribucion)
-                .filter(([cat]) => cat !== categoria)
-                .reduce((sum, [, val]) => sum + val, 0);
-            
-            if (otrosValores + nuevoValor <= PRESUPUESTO_TOTAL) {
-                distribucion[categoria] = nuevoValor;
-                
-                document.getElementById(`valor-${categoria}`).textContent = `$${formatearMiles(nuevoValor)}M`;
-                document.getElementById(`porcentaje-${categoria}`).textContent = 
-                    `${((nuevoValor / PRESUPUESTO_TOTAL) * 100).toFixed(1)}%`;
-                
-                const slider = document.getElementById(`slider-${categoria}`);
-                const porcentaje = (nuevoValor / PRESUPUESTO_TOTAL) * 100;
-                const cat = categorias.find(c => c.id === categoria);
-                slider.style.background = `linear-gradient(to right, ${cat.color} 0%, ${cat.color} ${porcentaje}%, #e5e7eb ${porcentaje}%, #e5e7eb 100%)`;
-                
-                actualizarContador();
-            } else {
-                document.getElementById(`slider-${categoria}`).value = distribucion[categoria];
-            }
-        }
+        function scrollToGrafico() {
+            document.getElementById('grafico-container').scrollIntoView({ behavior: 'smooth' });
+        }
 
-        function actualizarGrafico() {
-            const container = document.getElementById('barras-container');
-            container.innerHTML = '';
-            
-            const categoriasOrdenadas = [...categorias].sort((a, b) => 
-                distribucion[b.id] - distribucion[a.id]
-            ).filter(cat => distribucion[cat.id] > 0);
-            
-            categoriasOrdenadas.forEach(cat => {
-                const valor = distribucion[cat.id];
-                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
-                
-                const barra = document.createElement('div');
-                barra.className = 'flex items-center gap-3';
-                barra.innerHTML = `
-                    <div class="w-36 text-right flex items-center justify-end gap-2">
-                        <span class="text-2xl">${cat.emoji}</span>
-                        <span class="text-sm font-semibold">${cat.nombre}</span>
-                    </div>
-                    <div class="flex-1">
-                        <div class="bg-gray-200 rounded-full h-10 relative overflow-hidden">
-                            <div class="h-10 rounded-full flex items-center justify-end pr-3 transition-all duration-500" 
-                                 style="width: ${porcentaje}%; background-color: ${cat.color}">
-                                <span class="text-sm font-bold text-white">${porcentaje.toFixed(1)}%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-28 text-right font-bold" style="color: #7010A6;">
-                        ${formatearMiles(valor)}M
-                    </div>
-                `;
-                container.appendChild(barra);
-            });
-        }
+        // 6. MODIFICAR las funciones existentes
 
-        function generarImagen() {
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = 1200;
-            canvas.height = 630;
-            
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, 1200, 630);
-            
-            ctx.fillStyle = '#7010A6';
-            ctx.fillRect(0, 0, 1200, 120);
-            
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 36px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Si yo fuera Alcalde invertiría 195 mil millones en:', 600, 70);
-            
-            ctx.fillStyle = '#FCD700';
-            ctx.font = '20px Arial';
-            ctx.fillText('Esta es mi propuesta de distribución presupuestal', 600, 100);
-            
-            const startY = 150;
-            const barHeight = 45;
-            const maxBarWidth = 650;
-            const startX = 280;
-            
-            const categoriasOrdenadas = [...categorias]
-                .sort((a, b) => distribucion[b.id] - distribucion[a.id])
-                .filter(cat => distribucion[cat.id] > 0);
-            
-            categoriasOrdenadas.forEach((cat, index) => {
-                const y = startY + (index * (barHeight + 8));
-                const valor = distribucion[cat.id];
-                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
-                const barWidth = (porcentaje / 100) * maxBarWidth;
-                
-                ctx.font = '20px Arial';
-                ctx.fillStyle = '#333333';
-                ctx.textAlign = 'right';
-                ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 15, y + 28);
-                
-                ctx.fillStyle = '#E5E7EB';
-                ctx.fillRect(startX, y, maxBarWidth, barHeight);
-                
-                ctx.fillStyle = cat.color;
-                ctx.fillRect(startX, y, barWidth, barHeight);
-                
-                if (porcentaje > 5) {
-                    ctx.fillStyle = '#FFFFFF';
-                    ctx.font = 'bold 16px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`${porcentaje.toFixed(1)}%`, startX + barWidth/2, y + 28);
-                }
-                
-                ctx.fillStyle = '#333333';
-                ctx.font = 'bold 18px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText(`${formatearMiles(valor)}M`, startX + maxBarWidth + 15, y + 28);
-            });
-            
-            ctx.fillStyle = '#7010A6';
-            ctx.font = 'bold 22px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Para mí, mientras hayan 313.257 personas en pobreza,', 600, 540);
-            ctx.fillText('el "mar" NO es una prioridad ni hace que a Medellín no le falte nada', 600, 570);
-            
-            ctx.fillStyle = '#FCD700';
-            ctx.font = 'bold 18px Arial';
-            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 600);
-            
-            imageUrl = canvas.toDataURL('image/png');
-            document.getElementById('imagen-preview').src = imageUrl;
-            document.getElementById('compartir-container').classList.remove('hidden');
-            document.getElementById('compartir-container').scrollIntoView({ behavior: 'smooth' });
-        }
+        // En actualizarContador(), cambiar:
+        function actualizarContador() {
+            const totalAsignado = Object.values(distribucion).reduce((sum, val) => sum + val, 0);
+            const restante = PRESUPUESTO_TOTAL - totalAsignado;
+            const porcentajeAsignado = (totalAsignado / PRESUPUESTO_TOTAL) * 100;
+            
+            const contador = document.getElementById('contador');
+            const estadoTexto = document.getElementById('estado-texto');
+            const barraProgreso = document.getElementById('barra-progreso');
+            const mensajeCompletado = document.getElementById('mensaje-completado');
+            const graficoContainer = document.getElementById('grafico-container');
+            const compartirContainer = document.getElementById('compartir-container');
+            const formularioContainer = document.getElementById('formulario-container');
+            
+            contador.textContent = `$${formatearMiles(Math.abs(restante))}`;
+            barraProgreso.style.width = `${porcentajeAsignado}%`;
+            
+            if (restante === 0) {
+                contador.className = 'text-4xl font-bold text-green-600 mb-2';
+                estadoTexto.textContent = '¡Distribución completa!';
+                estadoTexto.className = 'text-sm text-green-600 mb-4 font-bold';
+                mensajeCompletado.classList.remove('hidden');
+                graficoContainer.classList.remove('hidden');
+                formularioContainer.classList.remove('hidden');
+                compartirContainer.classList.add('hidden');
+                actualizarGrafico();
+                enviarDistribucionInicial(); // CAMBIAR esta línea
+            } else if (restante > 0) {
+                contador.className = 'text-4xl font-bold mb-2';
+                contador.style.color = '#7010A6';
+                estadoTexto.textContent = `Faltan ${formatearMiles(restante)} millones por asignar`;
+                estadoTexto.className = 'text-sm text-gray-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
+                graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
+                formularioContainer.classList.add('hidden');
+            } else {
+                contador.className = 'text-4xl font-bold text-red-600 mb-2';
+                estadoTexto.textContent = `Te excediste por ${formatearMiles(Math.abs(restante))} millones`;
+                estadoTexto.className = 'text-sm text-red-600 mb-4';
+                mensajeCompletado.classList.add('hidden');
+                graficoContainer.classList.add('hidden');
+                compartirContainer.classList.add('hidden');
+                formularioContainer.classList.add('hidden');
+            }
+        }
 
-        function descargarImagen() {
-            const link = document.createElement('a');
-            link.download = 'mi-presupuesto-medellin.png';
-            link.href = imageUrl;
-            link.click();
-        }
+        function handleSliderChange(categoria, valor) {
+            const nuevoValor = parseInt(valor);
+            const otrosValores = Object.entries(distribucion)
+                .filter(([cat]) => cat !== categoria)
+                .reduce((sum, [, val]) => sum + val, 0);
+            
+            if (otrosValores + nuevoValor <= PRESUPUESTO_TOTAL) {
+                distribucion[categoria] = nuevoValor;
+                
+                document.getElementById(`valor-${categoria}`).textContent = `$${formatearMiles(nuevoValor)}M`;
+                document.getElementById(`porcentaje-${categoria}`).textContent = 
+                    `${((nuevoValor / PRESUPUESTO_TOTAL) * 100).toFixed(1)}%`;
+                
+                const slider = document.getElementById(`slider-${categoria}`);
+                const porcentaje = (nuevoValor / PRESUPUESTO_TOTAL) * 100;
+                const cat = categorias.find(c => c.id === categoria);
+                slider.style.background = `linear-gradient(to right, ${cat.color} 0%, ${cat.color} ${porcentaje}%, #e5e7eb ${porcentaje}%, #e5e7eb 100%)`;
+                
+                actualizarContador();
+            } else {
+                document.getElementById(`slider-${categoria}`).value = distribucion[categoria];
+            }
+        }
 
-        function compartirEnRedes(red) {
-            const mensaje = encodeURIComponent('El Alcalde gastará 195 mil millones en "mar" mientras 313,257 personas viven en pobreza. Yo invertiría diferente. ¿Y tú? Haz tu propuesta ciudadana #MedellínDecide #NoMásCaprichos');
-            const url = encodeURIComponent(window.location.href);
-            
-            const urls = {
-                twitter: `https://twitter.com/intent/tweet?text=${mensaje}&url=${url}`,
-                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-                whatsapp: `https://wa.me/?text=${mensaje}%20${url}`
-            };
-            
-            window.open(urls[red], '_blank');
-            
-            compartidoEnRedes = true;
-            redCompartida = red;
-            // No enviar datos aquí - ya se enviaron al completar distribución
-        }
+        function actualizarGrafico() {
+            const container = document.getElementById('barras-container');
+            container.innerHTML = '';
+            
+            const categoriasOrdenadas = [...categorias].sort((a, b) => 
+                distribucion[b.id] - distribucion[a.id]
+            ).filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach(cat => {
+                const valor = distribucion[cat.id];
+                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
+                
+                const barra = document.createElement('div');
+                barra.className = 'flex items-center gap-3';
+                barra.innerHTML = `
+                    <div class="w-36 text-right flex items-center justify-end gap-2">
+                        <span class="text-2xl">${cat.emoji}</span>
+                        <span class="text-sm font-semibold">${cat.nombre}</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-gray-200 rounded-full h-10 relative overflow-hidden">
+                            <div class="h-10 rounded-full flex items-center justify-end pr-3 transition-all duration-500" 
+                                 style="width: ${porcentaje}%; background-color: ${cat.color}">
+                                <span class="text-sm font-bold text-white">${porcentaje.toFixed(1)}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-28 text-right font-bold" style="color: #7010A6;">
+                        ${formatearMiles(valor)}M
+                    </div>
+                `;
+                container.appendChild(barra);
+            });
+        }
+        
+        // En generarImagen(), agregar:
+        function generarImagen() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 1200;
+            canvas.height = 630;
+            
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, 1200, 630);
+            
+            ctx.fillStyle = '#7010A6';
+            ctx.fillRect(0, 0, 1200, 120);
+            
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Si yo fuera Alcalde invertiría 195 mil millones en:', 600, 70);
+            
+            ctx.fillStyle = '#FCD700';
+            ctx.font = '20px Arial';
+            ctx.fillText('Esta es mi propuesta de distribución presupuestal', 600, 100);
+            
+            const startY = 150;
+            const barHeight = 45;
+            const maxBarWidth = 650;
+            const startX = 280;
+            
+            const categoriasOrdenadas = [...categorias]
+                .sort((a, b) => distribucion[b.id] - distribucion[a.id])
+                .filter(cat => distribucion[cat.id] > 0);
+            
+            categoriasOrdenadas.forEach((cat, index) => {
+                const y = startY + (index * (barHeight + 8));
+                const valor = distribucion[cat.id];
+                const porcentaje = (valor / PRESUPUESTO_TOTAL) * 100;
+                const barWidth = (porcentaje / 100) * maxBarWidth;
+                
+                ctx.font = '20px Arial';
+                ctx.fillStyle = '#333333';
+                ctx.textAlign = 'right';
+                ctx.fillText(`${cat.emoji} ${cat.nombre}`, startX - 15, y + 28);
+                
+                ctx.fillStyle = '#E5E7EB';
+                ctx.fillRect(startX, y, maxBarWidth, barHeight);
+                
+                ctx.fillStyle = cat.color;
+                ctx.fillRect(startX, y, barWidth, barHeight);
+                
+                if (porcentaje > 5) {
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`${porcentaje.toFixed(1)}%`, startX + barWidth/2, y + 28);
+                }
+                
+                ctx.fillStyle = '#333333';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${formatearMiles(valor)}M`, startX + maxBarWidth + 15, y + 28);
+            });
+            
+            ctx.fillStyle = '#7010A6';
+            ctx.font = 'bold 22px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Para mí, mientras hayan 313.257 personas en pobreza,', 600, 540);
+            ctx.fillText('el "mar" NO es una prioridad ni hace que a Medellín no le falte nada', 600, 570);
+            
+            ctx.fillStyle = '#FCD700';
+            ctx.font = 'bold 18px Arial';
+            ctx.fillText('#MedellínDecide #PresupuestoParticipativo', 600, 600);
+            
+            imageUrl = canvas.toDataURL('image/png');
+            document.getElementById('imagen-preview').src = imageUrl;
+            document.getElementById('compartir-container').classList.remove('hidden');
+            document.getElementById('compartir-container').scrollIntoView({ behavior: 'smooth' });
+            actualizarConImagen();
+        }
 
-        function detectarNavegador() {
-            const agent = navigator.userAgent;
-            if (agent.indexOf('Chrome') > -1) return 'Chrome';
-            if (agent.indexOf('Safari') > -1) return 'Safari';
-            if (agent.indexOf('Firefox') > -1) return 'Firefox';
-            return 'Otro';
-        }
+        function descargarImagen() {
+            const link = document.createElement('a');
+            link.download = 'mi-presupuesto-medellin.png';
+            link.href = imageUrl;
+            link.click();
+        }
 
-        let datosEnviados = false; // Variable global para controlar envío único
+        // En compartirEnRedes(), modificar:
+        function compartirEnRedes(red) {
+            const mensaje = encodeURIComponent('El Alcalde gastará 195 mil millones en "mar" mientras 313,257 personas viven en pobreza. Yo invertiría diferente. ¿Y tú? Haz tu propuesta ciudadana #MedellínDecide #NoMásCaprichos');
+            const url = encodeURIComponent(window.location.href);
+            
+            const urls = {
+                twitter: `https://twitter.com/intent/tweet?text=${mensaje}&url=${url}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                whatsapp: `https://wa.me/?text=${mensaje}%20${url}`
+            };
+            
+            window.open(urls[red], '_blank');
+            actualizarConCompartir(red); // CAMBIAR esta línea
+        }
 
-        // Función para enviar datos a Google Sheets (una sola vez por sesión)
-        async function enviarDatosAGoogleSheets() {
-            // Prevenir múltiples envíos
-            if (datosEnviados) {
-                console.log('Datos ya enviados previamente');
-                return;
-            }
+        function detectarNavegador() {
+            const agent = navigator.userAgent;
+            if (agent.indexOf('Chrome') > -1) return 'Chrome';
+            if (agent.indexOf('Safari') > -1) return 'Safari';
+            if (agent.indexOf('Firefox') > -1) return 'Firefox';
+            return 'Otro';
+        }
 
-            const datosParaEnviar = {
-                action: 'guardar_respuesta',
-                timestamp: new Date().toISOString(),
-                session_id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-                distribucion: distribucion,
-                imagen_generada: imageUrl ? 'SI' : 'NO',
-                imagen_compartida: compartidoEnRedes ? 'SI' : 'NO',
-                red_compartida: redCompartida || '',
-                formulario_completado: formularioCompletado ? 'SI' : 'NO',
-                nombre: document.getElementById('nombre')?.value || '',
-                email: document.getElementById('email')?.value || '',
-                whatsapp: document.getElementById('whatsapp')?.value || '',
-                autorizo_contacto: document.getElementById('autorizo')?.checked ? 'SI' : 'NO',
-                ideas: document.getElementById('ideas')?.value || '',
-                dispositivo: screen.width < 768 ? 'Móvil' : 'Desktop',
-                navegador: detectarNavegador(),
-                tiempo_sesion_segundos: Math.floor((Date.now() - tiempoInicio) / 1000)
-            };
-            
-            try {
-                console.log('Enviando datos al backend...');
-                datosEnviados = true; // Marcar como enviado ANTES de la llamada
-                
-                const response = await fetch(BACKEND_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datosParaEnviar)
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Datos enviados exitosamente:', data);
-                    
-                    if (data.estadisticas && data.estadisticas.total_participantes) {
-                        console.log(`Eres el participante #${data.estadisticas.total_participantes}`);
-                    }
-                } else {
-                    console.error('Error del proxy:', response.status);
-                    datosEnviados = false; // Permitir reintento en caso de error
-                    localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
-                    console.log('Datos guardados localmente como backup');
-                }
-                
-            } catch (error) {
-                console.error('Error enviando datos:', error);
-                datosEnviados = false; // Permitir reintento en caso de error
-                localStorage.setItem('respuesta_backup_' + Date.now(), JSON.stringify(datosParaEnviar));
-                console.log('Datos guardados localmente como backup');
-            }
-        }
+        function inicializarSliders() {
+            const container = document.getElementById('sliders-container');
+            
+            categorias.forEach(cat => {
+                const sliderDiv = document.createElement('div');
+                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm';
+                sliderDiv.style.background = `rgba(${cat.color === '#7010A6' ? '112, 16, 166' : '252, 215, 0'}, 0.05)`;
+                sliderDiv.innerHTML = `
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">${cat.emoji}</span>
+                                <div>
+                                    <div class="font-bold text-gray-800">${cat.nombre}</div>
+                                    <div class="text-xs text-gray-500">Incrementos de $1,000M</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-sm mb-3">
+                            <span id="porcentaje-${cat.id}" class="text-gray-600 font-medium">0%</span>
+                            <span id="valor-${cat.id}" class="font-bold" style="color: ${cat.color};">$0M</span>
+                        </div>
+                        <input
+                            type="range"
+                            id="slider-${cat.id}"
+                            min="0"
+                            max="${PRESUPUESTO_TOTAL}"
+                            step="1000"
+                            value="0"
+                            onchange="handleSliderChange('${cat.id}', this.value)"
+                            oninput="handleSliderChange('${cat.id}', this.value)"
+                            class="slider w-full"
+                            style="background: linear-gradient(to right, ${cat.color} 0%, ${cat.color} 0%, #e5e7eb 0%, #e5e7eb 100%)"
+                        />
+                    </div>
+                `;
+                container.appendChild(sliderDiv);
+            });
+        }
 
-        function inicializarSliders() {
-            const container = document.getElementById('sliders-container');
-            
-            categorias.forEach(cat => {
-                const sliderDiv = document.createElement('div');
-                sliderDiv.className = 'bg-white p-5 rounded-xl shadow-sm';
-                sliderDiv.style.background = `rgba(${cat.color === '#7010A6' ? '112, 16, 166' : '252, 215, 0'}, 0.05)`;
-                sliderDiv.innerHTML = `
-                    <div class="mb-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <span class="text-3xl">${cat.emoji}</span>
-                                <div>
-                                    <div class="font-bold text-gray-800">${cat.nombre}</div>
-                                    <div class="text-xs text-gray-500">Incrementos de $1,000M</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm mb-3">
-                            <span id="porcentaje-${cat.id}" class="text-gray-600 font-medium">0%</span>
-                            <span id="valor-${cat.id}" class="font-bold" style="color: ${cat.color};">$0M</span>
-                        </div>
-                        <input
-                            type="range"
-                            id="slider-${cat.id}"
-                            min="0"
-                            max="${PRESUPUESTO_TOTAL}"
-                            step="1000"
-                            value="0"
-                            onchange="handleSliderChange('${cat.id}', this.value)"
-                            oninput="handleSliderChange('${cat.id}', this.value)"
-                            class="slider w-full"
-                            style="background: linear-gradient(to right, ${cat.color} 0%, ${cat.color} 0%, #e5e7eb 0%, #e5e7eb 100%)"
-                        />
-                    </div>
-                `;
-                container.appendChild(sliderDiv);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            inicializarSliders();
-            actualizarContador();
-            
-            const ideasTextarea = document.getElementById('ideas');
-            const contadorCaracteres = document.getElementById('contador-caracteres');
-            
-            if (ideasTextarea && contadorCaracteres) {
-                ideasTextarea.addEventListener('input', function() {
-                    contadorCaracteres.textContent = this.value.length;
-                });
-            }
-            
-            const formulario = document.getElementById('formulario-contacto');
-            if (formulario) {
-                formulario.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    const btnEnviar = document.getElementById('btn-enviar');
-                    const mensajeEnviando = document.getElementById('mensaje-enviando');
-                    const mensajeExito = document.getElementById('mensaje-exito');
-                    const mensajeError = document.getElementById('mensaje-error');
-                    
-                    btnEnviar.style.display = 'none';
-                    mensajeEnviando.classList.remove('hidden');
-                    mensajeExito.classList.add('hidden');
-                    mensajeError.classList.add('hidden');
-                    
-                    formularioCompletado = true;
-                    
-                    try {
-                        await enviarDatosAGoogleSheets();
-                        
-                        mensajeEnviando.classList.add('hidden');
-                        mensajeExito.classList.remove('hidden');
-                        
-                        setTimeout(() => {
-                            formulario.reset();
-                            btnEnviar.style.display = 'inline-block';
-                            mensajeExito.classList.add('hidden');
-                            contadorCaracteres.textContent = '0';
-                        }, 3000);
-                        
-                    } catch (error) {
-                        console.error('Error:', error);
-                        mensajeEnviando.classList.add('hidden');
-                        mensajeError.classList.remove('hidden');
-                        btnEnviar.style.display = 'inline-block';
-                        
-                        setTimeout(() => {
-                            mensajeError.classList.add('hidden');
-                        }, 5000);
-                    }
-                });
-            }
-        });
-    </script>
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarSliders();
+            actualizarContador();
+            
+            const ideasTextarea = document.getElementById('ideas');
+            const contadorCaracteres = document.getElementById('contador-caracteres');
+            
+            if (ideasTextarea && contadorCaracteres) {
+                ideasTextarea.addEventListener('input', function() {
+                    contadorCaracteres.textContent = this.value.length;
+                });
+            }
+            
+            const formulario = document.getElementById('formulario-contacto');
+            if (formulario) {
+                // En el event listener del formulario, cambiar:
+                formulario.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const btnEnviar = document.getElementById('btn-enviar');
+                    const mensajeEnviando = document.getElementById('mensaje-enviando');
+                    const mensajeExito = document.getElementById('mensaje-exito');
+                    const mensajeError = document.getElementById('mensaje-error');
+                    
+                    btnEnviar.style.display = 'none';
+                    mensajeEnviando.classList.remove('hidden');
+                    mensajeExito.classList.add('hidden');
+                    mensajeError.classList.add('hidden');
+                    
+                    try {
+                        const exitoso = await enviarFormularioCompleto(); // CAMBIAR esta línea
+                        
+                        if (exitoso) {
+                            mensajeEnviando.classList.add('hidden');
+                            mensajeExito.classList.remove('hidden');
+                            
+                            setTimeout(() => {
+                                formulario.reset();
+                                btnEnviar.style.display = 'inline-block';
+                                mensajeExito.classList.add('hidden');
+                                document.getElementById('contador-caracteres').textContent = '0';
+                            }, 3000);
+                        } else {
+                            throw new Error('Error en el envío');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        mensajeEnviando.classList.add('hidden');
+                        mensajeError.classList.remove('hidden');
+                        btnEnviar.style.display = 'inline-block';
+                        
+                        setTimeout(() => {
+                            mensajeError.classList.add('hidden');
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
